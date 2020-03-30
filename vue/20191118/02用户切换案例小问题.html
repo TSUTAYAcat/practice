@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录切换案例小问题</title>
+</head>
+
+<body>
+    <!-- 输入值后切换 原来的输入值还存在 加上key解决（解决原理：） -->
+    <div id="app">
+        <div v-if="isLogin">
+            <label for="login">用户登录</label>
+            <input type="text" placeholder="用户登录" id="login" key=“login” />
+        </div>
+        <div v-else>
+            <label for="register">用户注册</label>
+            <input type="text" placeholder="用户注册" id="register" key="register" />
+        </div>
+        <button @click="isLogin=!isLogin">切换</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                isLogin: true
+            },
+
+        })
+    </script>
+</body>
+
+</html>

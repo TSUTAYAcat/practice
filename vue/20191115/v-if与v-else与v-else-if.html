@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-if与v-else与v-else-if</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- v-if,v-else -->
+        <div v-if="isMing">小明</div>
+        <div v-else>其他人</div>
+         <!-- v-if,v-else-if,v-else -->
+         <div v-if="score>=90">优秀</div>
+         <div v-else-if="score<90&&score>=80">很好</div>
+         <div v-else>一般</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                isMing: true,
+                score:100
+            }
+        })
+    </script>
+</body>
+
+</html>

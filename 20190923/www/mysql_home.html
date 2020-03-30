@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>主页</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+    <style></style>
+</head>
+
+<body>
+    用户名： <input type="text" id="username" /><br />
+    密码： <input type="password" id="password" /><br />
+    <input type="button" id="login" value="登录" />
+    <input type="button" id="register" value="注册" />
+    <script>
+        $(function () {
+            $("#login").click(() => {
+                $.ajax({
+                    url: "/login",
+                    data: { username: $("#username").val(), password: $("#password").val() },
+                    dataType: "JSON",
+                    success(data) {
+                        if (data.err>0) {
+                            alert(`${data.msg}`)
+                        } else {
+                            alert(`成功`)
+                        }
+                    },
+                    error() {
+                        alert('接口调用失败')
+                    }
+                })
+            })
+            $("#register").click(() => {
+                $.ajax({
+                    url: "/res",
+                    data: { username: $("#username").val(), password: $("#password").val() },
+                    dataType: "JSON",
+                    success(data) {
+                        if (data.err>0) {
+                            alert(`错了${data.msg}`)
+                        } else {
+                            alert(`成功`)
+                        }
+                    },
+                    error() {
+                        alert('错了')
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

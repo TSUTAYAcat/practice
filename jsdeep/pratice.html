@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #map {
+            width: 600px;
+            height: 600px;
+            background-color: thistle;
+            position: relative;
+        }
+
+        #box {
+            width: 200px;
+            height: 200px;
+            top: 100px;
+            left: 100px;
+            background-color: orange;
+            position: absolute;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="test">
+        <li>这是第一条</li>
+        <li>这是第二条</li>
+        <li>这是第三条</li>
+    </ul>
+    <div id='map'>
+        <div id='box'></div>
+    </div>
+    <script>
+        // 1，对象深度克隆
+        // function copyDeep(obj, objCopy) {
+        //     for (var key in obj) {
+        //         if (obj[key] instanceof Array) {
+        //             objCopy[key] = []
+        //             copyDeep(obj[key], objCopy[key])
+        //         } else if (obj[key] instanceof Array) {
+        //             objCopy[key] = {}
+        //             copyDeep(obj[key], objCopy[key])
+        //         } else {
+        //             objCopy[key] = obj[key]
+        //         }
+        //     }
+        // }
+        // var obj = {
+        //     name: 'jam',
+        //     age: 18,
+        //     isBoy: true,
+        //     pet: {
+        //         name: 'mimi'
+        //     },
+        //     friends:['swift','lisag']
+        // }
+        // let objCopy = {}
+        // copyDeep(obj, objCopy)
+        // console.log(obj, objCopy)
+
+        // 2，消除数组重复元素
+        function deRepeat(arr) {
+            var obj = {}
+            var res = []
+            arr.forEach(e => {
+                if (obj[e] !== 1) {
+                    obj[e] = 1
+                    res.push(e)
+                }
+            })
+            return res
+        }
+        // console.log(deRepeat([1, 2, 3, 3, 4, 4, 5, 5, 6, 1, 9, 3, 25, 4]))
+
+        // 3，狗狗继承 继承父类 使用父类属性 重写父类方法
+        function Dog() {
+            this.wow = function () {
+                console.log('Wow');
+            }
+            this.yelp = function () {
+                this.wow();
+            }
+        }
+        function MadDog() {
+            this.yelp = function () {
+                setInterval(e => {
+                    this.wow()
+                }, 500)
+            }
+        }
+        MadDog.prototype = new Dog()
+        // var madDog = new MadDog()
+        // madDog.wow()
+        // madDog.yelp()
+
+        // 4，下面这个ul，如何点击每一列的时候alert其index?(这特么 本身li应该没有index属性，所以需要我们给他添加或者别的办法)
+        // dom污染实现
+        function getLiIndexDirtyDom(list) {
+            for (let i = 0; i < list.length; i++) {
+                list[i].index = i
+                list[i].onclick = function () {
+                    alert(this.index)
+                }
+            }
+        }
+        // 闭包实现
+        function getLiIndexClosure(list) {
+            for (let i = 0; i < list.length; i++) {
+                list[i].index = i
+                list[i].onclick = (function (a) {
+                    return function () {
+                        alert(a)
+                    }
+                }(i))
+            }
+        }
+        const liList = document.getElementById('test').children
+        // getLiIndexDirtyDom(liList)
+        // getLiIndexClosure(liList)
+
+        // 5，给String对象添加一个方法，传入一个string类型的参数，然后将string的每个字符间价格空格返回
+        String.prototype.addSpace = function addSpace(str) {
+            return str.split('').join(' ')
+        }
+        // console.log(String.prototype.addSpace('hello world'))
+        // console.log(String.addSpace('hello world'))
+
+        // 6，函数声明与函数表达式区别
+        // console.log(expressFN)
+        // var expressFN = function(){
+        //     console.log(1)
+        // }
+        // console.log(expressFN)
+
+        // 7,定义一个log方法，让它可以代理console.log的方法。
+        function log() {
+            if (true) {
+                console.log.apply(console, arguments)
+            } else {
+                console.log.call(console, ...arguments)
+            }
+        }
+        // log(1, 2, 3, 4)
+
+        //  弄平数组FLAT
+        // 一般递归弄平多维数组
+        let newArr_ = []
+        function my_flat(arr) {
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] instanceof Array) {
+                    my_flat(arr[i])
+                } else {
+                    newArr_.push(arr[i])
+                }
+            }
+            return newArr_
+        }
+        // 使用reduce弄平
+        function flat_reduce(arr) {
+            return arr.reduce((a, b) => {
+                return a.concat(Array.isArray(b) ? flat_reduce(b) : b)
+            }, [])
+        }
+        // console.log(my_flat([1, [1221, 1, [1], 2], { name: 'dick' }]))
+        // console.log(flat_reduce([1, [1221, 1, [1], 2], { name: 'dick' }]))
+
+        // 实现拖拽
+        var map = document.getElementById('map') // 获取移动空间
+        var box = document.getElementById('box') // 获取移动物体
+        var x, y;                                // 获取鼠标点击位置距离盒子原点的X,Y距离
+        var isMoving = false;                    // 判断当前是否可以移动，onmousemove是否生效（只有点击盒子内部才可以生效
+        // first 
+        box.onmousedown = function (e) {
+            var e = e || window.event;
+            x = e.clientX - box.offsetLeft;
+            y = e.clientY - box.offsetTop;
+            isMoving = true
+        }
+        // second
+        document.onmousemove = function (e) {
+            if (isMoving) {
+                var e = e || window.event;
+                var moveX = e.clientX - x
+                moveX = Math.max(Math.min(map.offsetWidth - box.offsetWidth, moveX), 0)
+                var moveY = e.clientY - y;
+                moveY = Math.max(Math.min(map.offsetHeight - box.offsetHeight, moveY), 0)
+                box.style.left = moveX + 'px'
+                box.style.top = moveY + 'px'
+            }
+        }
+        // third
+        document.onmouseup = function (e) {
+            isMoving = false
+        }
+
+        // 7快速排序
+        function quickSort(arr) {
+            if (arr.length <= 1) {
+                return arr
+            }
+            let mid = arr.splice(~~(arr.length / 2), 1)
+            let left = []
+            let right = []
+
+            for (let i = 0; i < arr.length; i++) {
+                if (arr[i] <= mid) {
+                    left.push(arr[i])
+                } else {
+                    right.push(arr[i])
+                }
+            }
+            return quickSort(left).concat(mid, quickSort(right))
+        }
+        console.log(quickSort([1, 2, 3, 5, 9, 8, 7, 6]))
+    </script>
+</body>
+
+</html>

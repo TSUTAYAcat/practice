@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>07作用域插槽</title>
+    <style>
+        div {
+            width: 70%;
+            height: 70%;
+            border: bisque solid 10px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" style="width:400px;height:400px">
+        <cpn1></cpn1>
+        <cpn1>
+            <template slot-scope="slot">
+                <span v-for="item in slot.data">{{item}}-</span>
+            </template>
+        </cpn1>
+        <cpn1>
+            <template slot-scope="slot">
+                <span>{{slot.data.join('-')}}</span>
+            </template>
+        </cpn1>
+    </div>
+    <template id="cpn1">
+        <div>
+            <slot :data="pLanguage">
+                <ul>
+                    <li v-for="item in pLanguage">{{item}}</li>
+                </ul>
+            </slot>
+        </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            components: {
+                cpn1: {
+                    template: "#cpn1",
+                    data() {
+                        return {
+                            pLanguage: ["javascript", "java", "c", "c++", "oc"],
+                            color:["black","white"]
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>02父子组件通信子传父（自定义事件） </title>
+</head>
+
+<body>
+    <div id="app">
+        <mycpn @myclick="click"></mycpn>
+    </div>
+    <template id="cpn">
+        <div>
+          <button v-for="item in country" @click="cpnclick(item)">{{item}}</button>
+        </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            methods:{
+                click(item){
+                    console.log(2,item)
+                }
+            },
+            components: {
+                mycpn: {
+                    template: "#cpn",
+                    props: {
+                        country: {
+                            type: Array,
+                            default() {
+                                return ["China", "Russia", "American", "England"]
+                            }
+                        }
+                    },
+                    methods:{
+                        cpnclick(item){
+                            this.$emit("myclick",item)
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

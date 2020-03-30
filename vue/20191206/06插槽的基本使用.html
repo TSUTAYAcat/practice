@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>06插槽的基本使用</title>
+    <style>
+        div {
+            width: 70%;
+            height: 70%;
+            border: bisque solid 10px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" style="width:400px;height:400px">
+        <cpn1><span slot="left">这是插槽</span><span slot="right">这是插槽1</span><span slot="right">这是插槽2</span></cpn1>
+    </div>
+    <template id="cpn1">
+        <div>
+            <button>new year</button>
+            <slot name="left"><span>left</span></slot>
+            <slot name="center"><span>cneter</span></slot>
+            <slot name="right"><span>RIGHT</span></slot>
+        </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            components: {
+                cpn1: {
+                    template: "#cpn1",
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

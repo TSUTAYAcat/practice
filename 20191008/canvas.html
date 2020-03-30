@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>canvas</title>
+    <style>
+        body {
+            /* background-color: black; */
+            text-align: center;
+        }
+
+        #cv {
+            background-color: antiquewhite;
+        }
+    </style>
+    <script>
+        window.onload = function () {
+            let canvas = document.getElementById("cv");
+            let cv = canvas.getContext('2d');
+            function createPic() {
+
+                // 三角形
+                cv.beginPath();
+                cv.moveTo(50, 50);
+                cv.lineTo(50, 100);
+                cv.lineTo(100, 100);
+                cv.lineTo(50, 50);
+                cv.closePath();
+                cv.fillStyle = "red";
+                cv.fill();
+                // 矩形
+                cv.beginPath();
+                cv.fillStyle = "blue";
+                cv.fillRect(150, 150, 50, 50);
+                cv.stroke();
+                // 矩形
+                cv.beginPath();
+                cv.strokeStyle = "purple";
+                cv.strokeRect(60, 60, 50, 50);
+                cv.stroke();
+                // 圆形
+                cv.beginPath();
+                cv.strokeStyle = "purple";
+                cv.fillStyle = "purple";
+                cv.arc(60, 60, 50, 0, 2 * Math.PI);
+                cv.stroke();
+                // 圆形
+                cv.beginPath();
+                cv.strokeStyle = "purple";
+                cv.fillStyle = "purple";
+                cv.arc(300, 300, 80, 0, 2 * Math.PI);
+                cv.stroke();
+            }
+            createPic();
+
+            // 画饼图
+            function createPie(circleX, circleY, circleR, angleStart, angleEnd, color) {
+                cv.beginPath();
+                cv.fillStyle = color;
+                let angle = (angleEnd - angleStart) * 2 * Math.PI / 360
+                cv.moveTo(circleX, circleY);
+                cv.arc(circleX, circleY, circleR, angleStart * 2 * Math.PI / 360, angleEnd * 2 * Math.PI / 360)
+                cv.closePath();
+                cv.fill();
+                cv.beginPath();
+                cv.font = "10px Arial";
+                cv.fillStyle = "#000";
+                cv.fillText(`${parseInt((angleEnd-angleStart)*100/360)}%`, circleX+0.7*circleR*Math.abs(Math.cos(angle*0.5))*Math.cos((angleEnd+angleStart)* Math.PI/360), circleY+0.7*circleR*Math.abs(Math.cos(angle*0.5))*Math.sin((angleEnd+angleStart)* Math.PI/360));
+                console.log(circleR*Math.cos(angle*0.5),Math.cos((angleEnd+angleStart)* Math.PI/360), circleR*Math.cos(angle*0.5),Math.sin((angleEnd+angleStart)* Math.PI/360))
+            }
+            createPie(300, 300, 70, 0, 30, "#fc0");
+            createPie(300, 300, 70, 30, 120, "#cc0");
+            createPie(300, 300, 70, 120, 360, "#ee0");
+            canvas.onmousemove = function (ev) {
+                let x = ev.offsetX, y = ev.offsetY;
+                if ((x > 150 && x < 150 + 50 && y > 150 && y < 150 + 50) || (Math.sqrt(Math.pow(x - 60, 2) + Math.pow(y - 60, 2)) < 50)) {
+                    cv.clearRect(0, 0, canvas.width, canvas.height)
+                    setTimeout(() => {
+                        createPic();
+                    }, 1000)
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="cv" width="600" height="600"></canvas>
+</body>
+
+</html>

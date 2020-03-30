@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>购物车案例</title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <div v-if="books.length>0">
+            <table>
+                <tr>
+                    <th>书籍名称</th>
+                    <th>出版日期</th>
+                    <th>价格</th>
+                    <th>购买数量</th>
+                    <th>操作</th>
+                </tr>
+                <tr v-for="(item , index) in books">
+                    <td>{{item.name}}</td>
+                    <td>{{item.date}}</td>
+                    <td>{{item.price|bookPrice}}</td>
+                    <td>
+                        <button v-bind:disabled="item.count<=1" @click="decrement(index)">-</button>
+                        {{item.count}}
+                        <button @click="increment(index)">+</button>
+                    </td>
+                    <td><button @click="deleteBooks(index)">{{"移除"}}</button></td>
+                </tr>
+            </table>
+            <div>总价：{{totalPrice|bookPrice}}</div>
+        </div>
+        <div v-else>
+            no books
+        </div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                books: [{
+                    name: "算法导论",
+                    date: "2019-11-30",
+                    price: 100,
+                    count: 1,
+                }, {
+                    name: "UNIX变成艺术",
+                    date: "2019-12-01",
+                    price: 101,
+                    count: 1,
+                }, {
+                    name: "编程珠玑",
+                    date: "2019-11-29",
+                    price: 108,
+                    count: 1,
+                }, {
+                    name: "算法导论",
+                    date: "2019-12-02",
+                    price: 109,
+                    count: 1,
+                },]
+            },
+            computed: {
+                totalPrice() {
+                    // let totalPrice = 0;
+                    // this.books.forEach(e => {
+                    //     totalPrice += e.price * e.count
+                    // })
+                    // return totalPrice;
+
+                    return totalPrice = this.books.reduce((pre, cur) => {
+                        return pre + cur.price * cur.count
+                    }, 0)
+
+                }
+            },
+            methods: {
+                increment(index) {
+                    this.books[index].count++;
+                },
+                decrement(index) {
+                    if (this.books[index].count > 1) {
+                        this.books[index].count--;
+                    }
+                },
+                deleteBooks(index) {
+                    this.books.splice(index, 1);
+                }
+            },
+            filters: {
+                bookPrice(price) {
+                    return "￥:" + price.toFixed(2)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

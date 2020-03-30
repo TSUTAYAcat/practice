@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind动态绑定class（数组语法） </title>
+    <style>
+        .active{
+            color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 效果见控制台审查元素 -->
+        <p class="title">百度一下</p>
+        <p class="title" :class=active>百度一下</p>
+        <!-- 数组语法 -->
+        <p class="title">百度一下</p>
+        <p class="title" :class="['active']">百度一下</p>
+        <p class="title" :class="classList()">百度一下</p>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                title: "title",
+                active:"active",
+            },
+            methods:{
+                classList:function(){
+                    return ['active']
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

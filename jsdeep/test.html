@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div onclick="getMessage()">点击</div>
+    <div id = 'content'></div>
+    <script>
+        // // 原生ajax
+        // function getMessage() {
+        //     var ajax;
+        //     if (window.XMLHttpRequest) {
+        //         ajax = new XMLHttpRequest();
+        //     } else {
+        //         ajax = new ActiveXObject();
+        //     }
+        //     ajax.onreadystatechange = function () {
+        //         if (ajax.readyState === 4 && ajax.status === 200) {
+        //           document.querySelector('#content').innerHTML = ajax.responseText
+        //         }
+        //     }
+        //     ajax.open('get','http://localhost:8080/user/userinfo',true);
+        //     ajax.send();
+        // }
+        // function shellSort(arr) {
+
+        //     var len = arr.length,
+
+        //         temp,
+
+        //         gap = 1;
+
+        //     while (gap < len / 3) {         //动态定义间隔序列
+
+        //         gap = gap * 3 + 1;
+
+        //     }
+        //     console.log('----:', len, temp, gap)
+
+        //     for (gap; gap > 0; gap = Math.floor(gap / 3)) {
+        //         console.log(gap, '~', '~')
+
+        //         for (var i = gap; i < len; i++) {
+        //             console.log(gap, i, '~')
+
+
+        //             temp = arr[i];
+
+        //             for (var j = i - gap; j >= 0 && arr[j] > temp; j -= gap) {
+        //                 console.log(gap, i, j)
+        //                 arr[j + gap] = arr[j];
+
+        //             }
+
+        //             arr[j + gap] = temp;
+
+        //         }
+
+        //     }
+
+        //     return arr;
+
+        // }
+        // console.log(shellSort([4, 2, 3, 1]))
+        // function param({ a:{b} }) {
+        //     console.log(b)
+        // }
+        // param({ a: { b: 1 } })
+        // let arr_ = [1,2,3]
+        // let [first,...second] = arr_
+        // console.log(first,second)
+        // var arr = [1, [[2, 3], 4], [5, 6]];
+
+        // var flat = function* (a) {
+        //     var length = a.length;
+        //     for (var i = 0; i < length; i++) {
+        //         var item = a[i];
+        //         if (typeof item !== 'number') {
+        //             yield* flat(item);
+        //         } else {
+        //         yield item;
+        //         }
+        //     }
+        // };
+        // let aa = flat(arr)
+        // // console.log(aa.next())
+        // console.log(aa.next(), aa.next())
+        // for (var f of flat(arr)) {
+        //     console.log(f);
+        // }
+        // function* ite(){
+        //     yield 1;
+        //     yield 2;
+        //     return 3
+        // }
+        // const iterator = ite()
+        // console.log(iterator.next())
+        // console.log(iterator.next())
+        // console.log(iterator.next())
+        // console.log(iterator.next())
+        // function* demo() {
+
+
+        //     console.log('Hello' + (yield)); // OK
+        //     console.log('Hello' + (yield 123)); // OK
+        // }
+        // let demoTest = demo()
+        // console.log(demoTest.next())
+        // console.log(demoTest.next())
+        // console.log(demoTest.next())
+        // console.log(demoTest.next())
+        // let obj_ = {}
+        // obj_[Symbol.iterator] = function* (){
+        //     yield 1;
+        //     yield 2;
+        // }
+        // console.log(...obj_)
+
+
+
+
+
+
+
+
+
+        // let delegatedIterator = (function* () {
+        //     yield 'Hello!';
+        //     yield 'Bye!';
+        //     return 1
+        // }());
+
+        // let delegatingIterator = (function* () {
+        //     yield 'Greetings!';
+        // //    for(let value of delegatedIterator){
+
+        // //        yield value
+        // //    }
+        // var a = yield* delegatedIterator
+        //     yield 'Ok, bye.';
+        // }());
+
+        // for (let value of delegatingIterator) {
+        //     console.log(value);
+        // }
+
+
+
+
+        // new Promise((resolve, reject) => {
+        //     console.log('a')
+        //     setTimeout(() => {
+        //         console.log(1)
+        //         resolve(1)
+        //     }, 1000)
+        // }).then(e => {
+        //     console.log(11)
+        // }).then(e => {
+        //     console.log(12)
+        //     return (e)
+        // }).then(() => {
+        //     console.log(13)
+        //     return new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             console.log(2)
+        //             resolve(2)
+        //         }, 1000)
+        //         console.log('b')
+        //     })
+        // }).then(e => {
+        //     console.log('e' + '3')
+        // })
+        // console.log('c')
+        // // a ,c ,1,11,12,13,b,2,e3
+    </script>
+</body>
+
+</html>

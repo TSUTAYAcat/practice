@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue指令</title>
+</head>
+
+<body>
+    <div id="app">
+       <!-- Mustache -->
+       <div>{{message}}</div>
+       <!-- v-once 只响应一次 -->
+       <div>{{message}}</div>
+       <div v-once>{{message}}</div>
+       <!-- v-html 显示html标签 -->
+       <div>{{url}}</div>
+       <div v-html="url"></div>
+       <!-- v-text 显示文本 -->
+       <div>{{message}}</div>
+       <div v-text="message"></div>
+       <!-- v-pre 显示{{}} -->
+       <div>{{message}}</div>
+       <div v-pre>{{message}}</div>
+       <!-- v-cloak 未渲染数据时不显示 -->
+       <div>{{message}}</div>
+       <div v-cloak>{{message}}</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                message:"上帝之杖",
+                url:`<a href="www.baidu.com">百度一下</a>`
+            }
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> -->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0" />
+    <title>聊天搭建</title>
+    <script src="http://172.26.9.248:8080/socket.io/socket.io.js"> </script>
+
+    <style>
+        #msgBox {
+            box-sizing: border-box;
+            width: 80%;
+            height: auto;
+            min-height: 10rem;
+            border: 1px solid black;
+            margin: 0 10% 0 10%;
+            padding: 3% 2%;
+        }
+
+        #msgBox li {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #inputBox {
+            width: 80%;
+            height: 5rem;
+            margin: 0 10% 0 10%;
+            padding: 0
+        }
+
+        #biu {
+            width: 4rem;
+            height: 2rem;
+            background-color: blue;
+            color: aliceblue;
+            border-radius: 10px;
+            float: right;
+            margin-right: 10%;
+        }
+
+        .input_dad {
+            width: 100%;
+            height: auto;
+            /* margin-top: 2rem; */
+        }
+
+        .selfLi {
+            text-align: right;
+        }
+
+        .chat_input {
+            margin-top: 2rem;
+        }
+        #connect {
+            color: red;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <p id="connect">服务器连接中断，请检查网络将连接</p>
+    <p class="chat_input">聊天框</p>
+    <div class="input_dad">
+        <ul id="msgBox" />
+    </div>
+    <p class="chat_input">输入框</p>
+    <div class="input_dad">
+        <textarea id="inputBox">
+            </textarea>
+    </div>
+    <div class="input_dad">
+        <input type="button" id="biu" value="提交" />
+    </div>
+</body>
+<script>
+    let socket = io.connect('ws://172.26.9.248:8080/');
+    let msg = document.getElementById('inputBox');
+    let submit = document.getElementById('biu');
+    let msgBox = document.getElementById('msgBox');
+    submit.onclick = function () {
+        let li = document.createElement('li');
+        li.classList.add('selfLi')
+        li.innerHTML = msg.value + ":我";
+        msgBox.appendChild(li);
+        socket.emit('msg', msg.value);
+        msg.value = '';
+    }
+    socket.on('connect',()=>{
+        document.getElementById('connect').style.cssText=`display:none`;
+    })
+    socket.on('disconnect', () => {
+        document.getElementById('connect').style.cssText=`display:block`;
+    })
+    socket.on('msg', (msg) => {
+        let li = document.createElement('li');
+        li.innerHTML = "对方:" + str;
+        msgBox.appendChild(li);
+    })
+</script>
+
+</html>

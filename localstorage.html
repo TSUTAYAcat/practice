@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <title>ES6</title>
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+  <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+  <style>
+    .box {
+      width: 30px;
+      height: 30px;
+      margin: 10px 10px;
+      border: 1px solid black;
+      background-color: antiquewhite;
+      text-align: center;
+      transition: 1s all ease;
+      transform: rotate(0deg);
+      position: fixed;
+      left: 10px;
+      top: 10px
+    }
+
+    .content {
+      font-size: 10px
+    }
+
+    .box:active {
+      border-radius: 16px;
+      width: 8px;
+      height: 6px;
+      background-color: yellow;
+      font-size: 9px;
+      transform:
+        rotate(1440deg) translate(200px) skew(10deg, 100deg)
+    }
+
+    @keyframes ani {
+      0% {
+        width: 60px;
+        height: 60px;
+        border-radius: 0px;
+        background-color: antiquewhite;
+        transform: rotate(0deg)
+      }
+
+      25% {
+        width: 60px;
+        height: 60px;
+        border-radius: 31px;
+        background-color: yellow;
+        transform: rotate(0deg)
+      }
+
+      50% {
+        width: 60px;
+        height: 60px;
+        border-radius: 31px;
+        background-color: yellow;
+        transform: rotate(360deg)
+      }
+
+      100% {
+        width: 30px;
+        height: 30px;
+        border-radius: 0px;
+        background-color: antiquewhite;
+        transform: rotate(0deg)
+      }
+    }
+
+    .box1 {
+      width: 30px;
+      height: 30px;
+      border: 1px solid black;
+      background-color: antiquewhite;
+      text-align: center;
+      animation: ani 2s ease 0s 5 alternate forwards;
+      position: fixed;
+      right: 10px;
+      top: 10px
+    }
+
+    .content1 {
+      font-size: 10px
+    }
+
+    .box2 {
+      width: 100px;
+      height: 100px;
+      margin: 50px auto;
+      /* background-color: antiquewhite; */
+      position: relative;
+      transition: 2s all ease;
+      transform: perspective(700px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      transform-style: preserve-3d;
+    }
+
+    .box2:active {
+      transform: rotateX(360deg) rotateY(180deg) rotateZ(90deg);
+    }
+
+    .box2 div {
+      width: 98px;
+      height: 98px;
+      border: 1px solid red;
+      background-color: yellow;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: 1s all ease;
+      opacity: 0.7;
+      border-radius: 0px;
+    }
+
+    .front {
+      transform:translateZ(50px)
+    }
+    .back {
+      transform:translateZ(-50px)
+    }
+    .up {
+      transform:rotateX(90deg) translateZ(50px) 
+    }
+    .down {
+      transform:rotateX(-90deg) translateZ(50px) 
+    }
+    .left {
+      transform:rotateY(-90deg) translateZ(50px) 
+    }
+    .right {
+      transform:rotateY(90deg) translateZ(50px) 
+    }
+    .box3 {
+      width: 100px;
+      height: 100px;
+      margin: 100px auto;
+      background-color: antiquewhite;
+      position: relative;
+      transition: 2s all ease;
+      transform: perspective(700px) rotateX(0deg) rotateY(0deg) rotateZ(0deg);
+      transform-style: preserve-3d;
+    }
+    .box3 div{
+      width: 98px;
+      height: 98px;
+      border: 1px solid red;
+      background-color: yellow;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: 2s all ease;
+      opacity: 0.7;
+      border-radius: 10px;
+    }
+    .box3 div:active{
+     transform: rotateX(90deg)
+    }
+  </style>
+</head>
+
+<body>
+  <div class="box" id="box">
+    <div class="content">大家好</div>
+  </div>
+  <div class="box1" id="box1">
+    <div class="content1">大家好</div>
+  </div>
+  <div class="box2" id="box2">
+    <div class="up child">上</div>
+    <div class="down child">下</div>
+    <div class="left child">左</div>
+    <div class="right child">右</div>
+    <div class="front child">前</div>
+    <div class="back child">后</div>
+  </div>
+  <div class="box3" id = "box3">
+    <div></div>
+  </div>
+</body>
+<script type="text/javascript">
+  // var box = document.getElementById("box")
+  // let flag = false
+  // setInterval(() => {
+  //   switch (flag) {
+  //     case false: box.style.transform = "rotate(360deg)"; flag = !flag; break;
+  //     case true: box.style.transform = "rotate(0deg)"; flag = !flag; break;
+  //   }
+  // }, 1000)
+</script>
+
+</html>

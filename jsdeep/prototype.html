@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <a id='dss' href='#'> 第一个链接 </a> </br>
+    <a href='#'> 第二个链接 </a> </br>
+    <a href='#'> 第三个链接 </a> </br>
+    <a href='#'> 第四个链接 </a> </br>
+    <script>
+        // (function fn0(ee,ff,gg) {
+        //     var a = 1; function a() { }; console.log(a)
+
+        //     function d() { }; var d = 1; console.log(d)
+
+        //     var b; function b() { }; console.log(b)
+
+        //     function c() { }; var c; console.log(c)
+
+        //     function ee (){ }; console.log(ee)
+
+        //     var ff  ; console.log(ff)
+
+        //     var ff = 77 ; console.log(ff)
+
+        //     var gg  ; console.log(gg)
+
+        //     var gg = 99 ; console.log(gg)
+
+        // }(55,66));
+        // var cc = 1
+        // console.log(cc)
+        // var cc= 2;
+        // console.log(cc)
+        // var cc = 1;
+        // const obj = {
+        //     a:1,
+        //     b:()=>{
+        //         console.log(this.a)
+        //     }
+        // }
+        // obj.b();
+
+        // const c= obj.b
+        // c()
+        // (function fn0(a) {
+        //     console.log(a);
+        //     var a = 3;
+        //     function a() { }
+        //     console.log(a);
+        // }(2));
+        // fn0(1)
+        // function fn1(a) {
+        //     console.log(a)
+        //     var a = 1
+        // }
+        // fn1(2);
+        // function fn2(a) {
+        //     console.log(a)
+        //     var a = 1
+        //     function a() {
+        //         console.log(a)
+        //     }
+
+        // }
+        // fn2(1)
+        // function fn3(a) {
+
+        //     var a = 1
+        //     function a() {
+        //         console.log(a)
+        //     }
+        //     console.log(a)
+        // }
+        // fn3(1)
+        // function fun() {//覆盖上面
+        //     return 20;
+        // }
+        // console.log(fun);
+        // var fun = undefined;//声明提前
+        // console.log(fun);
+        // (function(){
+        //    (function (){
+        //         h  = 2
+        //     }())
+        // }())
+        // console.log(h)
+        // var a = 10;
+        // a.pro = 10;
+        // console.log(a.pro + a);
+
+        // var s = 'hello';
+        // s.pro = 'world';
+        // console.log(s.pro + s);
+
+        // var lis = document.links;
+        // for (var i = 0, length = lis.length; i < length; i++) {
+        //     lis[i].index = i;
+        //     lis[i].onclick = function () {
+        //         alert(this.index);
+        //     };
+        // }
+
+        // const strArr = str.split('');
+        // let obj = {}
+        // strArr.forEach(e => {
+        //     // console.log(obj[e])
+        //     if (obj[e]) {
+        //         obj[e] += 1
+        //     } else {
+        //         obj[e] = 1
+        //     }
+        // })
+        // console.log(obj)
+        // let max = { name: '', count : 0 }
+        // for (let e in obj) {
+        //     if (obj[e] > max.count) {
+        //         max.name = e
+        //         max.count = obj[e]
+        //     }
+        // }
+        // console.log(max)
+
+        // var list = document.links
+        // for (let i = 0; i < list.length; i++) {
+        //     list[i].onclick = function () {
+        //         var count = 1
+        //         return function () {
+        //             count++
+        //             console.log(count)
+        //         }
+        //     }()
+        // }
+
+        // var obj0 = {
+        //     name: "lee",
+        //     age: 19,
+        //     carList: ['三蹦子', '蹦蹦', '摩托', '吉普'],
+        //     dog: {
+        //         name: 'cat',
+        //         age: 5,
+        //         color: ['yellow', 'black', 'white']
+        //     },
+        //     habbits:()=>{
+        //         alert('paly with cat')
+        //     }
+        // }
+        // var obj1 = {}
+
+        // function extend (obj0,obj1){
+        //     for(var key in obj0){
+        //         if(obj0[key] instanceof Array){
+        //            obj1[key] = []
+        //            extend(obj0[key],obj1[key])
+        //         }else if(obj0[key] instanceof Function){
+        //             obj1[key] = obj0[key]
+        //         }else if(obj0[key] instanceof Object){
+        //             obj1[key] = {}
+        //             extend(obj0[key],obj1[key])
+        //         }else{
+        //             obj1[key] = obj0[key]
+        //         }
+        //     }
+        // }
+        // extend(obj0,obj1);
+        // console.log(obj0,obj1)
+        // var root = document.documentElement
+        // console.log(root.children)
+
+        // function getAllName(node){
+        //     console.log(node.nodeName)
+        //     if(node.children&&node.children.length>0){
+        //         for(let i=0;i< node.children.length;i++ ){
+        //             // console.log(node.children[i])
+        //             getAllName(node.children[i])
+        //         }
+        //     }
+        // }
+        // getAllName(root)
+        // var key = 1
+        // var fn = function () {
+        //     for (var i = 0; i < 3; i++) {
+        //         setTimeout(function () {
+        //             console.log(i);
+        //         }, 0);
+        //         console.log(i);
+        //     }
+        // };
+        // fn();
+        // var a = {b:{d:1}}
+        // var c = a.b
+        // a = null
+        // console.log(a,c)
+        // function showId() {
+        //     var el = document.links[0]
+        //     var id = el.id
+        //     el.onclick = function () {
+        //         console.log(id)   // 这样会导致闭包引用外层的el，当执行完showId后，el无法释放
+        //     }
+        //     el = null
+        // }
+        // showId()
+
+        // // 递归求n的阶乘
+        // function getMul(n) {
+        //     if (n === 1) {
+        //         return n
+        //     }
+        //     return n * getMul(n - 1)
+        // }
+        // console.log(getMul(6))
+        // // 递归求1-n的累加和
+        // function getSum(n) {
+        //     if (n === 1) {
+        //         return n
+        //     }
+        //     return n + getSum(n - 1)
+        // }
+        // console.log(getSum(5))
+        // // 递归求斐波那契数列
+        // function getFib(n) {
+        //     if (n <= 2) {
+        //         return 1
+        //     }
+        //     return  getFib(n - 1) + getFib(n - 2)
+        // }
+        // console.log(getFib(8))  
+        // var res = function(){
+        //     return 1
+        // }
+        // var data = res;
+        // res = null;
+        // console.log(data());
+        // function res(n) {
+        //     return n ==1 ? 1 : n * res(n - 1);
+        // };
+        // var  data = res;
+        // res = null;
+        // console.log(data(4));
+
+        // 使用递归实现数组扁平化
+        // function myflat() {
+        //     var arrRes = []
+        //     return function flat(arr) {
+        //         for (let i = 0; i < arr.length; i++) {
+        //             if (Array.isArray(arr[i])) {
+        //                 flat(arr[i])
+        //             } else {
+        //                 arrRes.push(arr[i])
+        //             }
+        //         }
+        //         return arrRes
+        //     }
+        // }
+
+        // var fn = myflat()
+        // console.log(fn([1, [2, [3, [4, 5]]], 6]))
+    </script>
+</body>
+
+</html>

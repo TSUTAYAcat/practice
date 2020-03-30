@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-if与v-show区别</title>
+</head>
+
+<body>
+    <!-- v-if会删除dom中元素再添加，v-show修改的是元素属性display -->
+    <div id="app">
+        <div v-if="isShow" id="if">你好</div>
+        <div v-show="isShow" id="show">你好</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                isShow: true
+            },
+
+        })
+    </script>
+</body>
+
+</html>

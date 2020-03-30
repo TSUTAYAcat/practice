@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性与methods对比</title>
+</head>
+<body>
+    <div id="app">
+        <div>{{getFullName()}}</div>
+        <div>{{getFullName()}}</div>
+        <div>{{getFullName()}}</div>
+        <div>{{getFullName()}}</div>
+        <div>{{fullName}}</div>
+        <div>{{fullName}}</div>
+        <div>{{fullName}}</div>
+        <div>{{fullName}}</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                firstName:"Micheal",
+                lastName:"Jackson"
+            },
+            computed:{
+                fullName: function(){
+                    console.log("执行一遍");
+                    return this.firstName+" "+this.lastName
+                }
+            },
+            methods:{
+                getFullName:function(){
+                    console.log("执行四遍");
+                    return this.firstName+" "+this.lastName
+                }
+            }
+        })
+    </script>
+</body>
+</html>

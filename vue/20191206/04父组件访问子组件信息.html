@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>04父组件访问子组件信息</title>
+</head>
+
+<body>
+    <div id="app">
+        <mycpn ref="cpn1" @calculate="counter"></mycpn>
+        <div @click="showMSG">当前计数：{{count}}</div>
+    </div>
+    <template id="cpn">
+        <div>
+            <button @click="decrement">-</button>
+            <button @click="increment">+</button>
+        </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: { count: 0 },
+            methods: {
+                counter(count) {
+                    this.count = count
+                },
+                showMSG(){
+                    console.log(this.$children[0].countC);
+                    console.log(this.$refs.cpn1.countC);
+                }
+            },
+            components: {
+                mycpn: {
+                    template: "#cpn",
+                    data() {
+                        return {
+                            countC: 0
+                        }
+                    },
+                    methods: {
+                        decrement() {
+                            this.countC--;
+                            this.$emit("calculate", this.countC)
+                        },
+                        increment(item) {
+                            this.countC++;
+                            this.$emit("calculate", this.countC)
+                        },
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

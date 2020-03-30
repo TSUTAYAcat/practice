@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>05v-model修饰符</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- lazy 点击回车或者失去焦点发生变化 -->
+        <input type="text" v-model="msg" />
+        <input type="text" v-model.lazy="msg" />
+        <div>{{msg}}</div>
+         <!-- number 数字类型保存依旧为数字类型 -->
+         <input type="number" v-model="num" />
+         <input type="number" v-model.number="num" />
+         <div>{{typeof num}}</div>
+          <!-- trim 消除左右两边空格 -->
+          <input type="text" v-model="trimValue" />
+          <input type="text" v-model.trim="trimValue" />
+          <div>{{trimValue}}</div>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                msg: "香蕉",
+                num: 0,
+                trimValue:""
+            },
+        })
+    </script>
+</body>
+
+</html>

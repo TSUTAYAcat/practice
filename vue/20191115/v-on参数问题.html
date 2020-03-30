@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on参数问题</title>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 无参数 -->
+        <button @click="click1">click</button>
+        <button @click="click1()">click</button>
+        <!-- 有参数 -->
+        <button @click="click2">click</button>
+        <button @click="click2()">click</button>
+        <!-- 浏览器参数的event对象 -->
+        <button @click="click3('abc',event)">click</button>
+        <button @click="click3('abc',$event)">click</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+
+            },
+            methods: {
+                click1: function () {
+                    console.log('click1')
+                },
+                click2: function (param) {
+                    console.log('click2',param)
+                },
+                click3: function (param1,param2) {
+                    console.log('click3',param1,param2)
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

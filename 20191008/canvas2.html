@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas2</title>
+    <style>
+        body {
+            text-align: center;
+            margin-top: 100px;
+            background-color: black
+        }
+    </style>
+    <script>
+        window.onload = () => {
+            let cvs = document.getElementById("cvs").getContext('2d');
+            let r = 0;
+            function next() {
+                cvs.beginPath();
+                cvs.save(); // 保存canvas状态，rotate，translate，不包括颜色图形等
+                cvs.clearRect(0, 0, document.getElementById("cvs").width, document.getElementById("cvs").height)
+                r += 1;
+                cvs.translate(200, 200)
+                cvs.rotate(r * 2 * Math.PI / 360);
+                cvs.fillStyle = "pink";
+                cvs.fillRect(0, 0, 0.5*document.getElementById("cvs").width, 0.5*document.getElementById("cvs").height)
+                cvs.strokeRect(-50, -50, 100, 100);
+                // cvs.restore(); // 恢复上一次保存状态
+                // r += 1;
+                // cvs.translate(100, 100)
+                cvs.rotate(r * 2 * Math.PI / 360);
+                cvs.fillStyle = "pink";
+                cvs.fillRect(0, 0, 0.5*document.getElementById("cvs").width, 0.5*document.getElementById("cvs").height)
+                cvs.strokeRect(-25, -25, 50, 50);
+                cvs.restore(); // 恢复上一次保存状态
+                requestAnimationFrame(next);
+            }
+            requestAnimationFrame(next);
+        }
+    </script>
+</head>
+
+<body>
+    <canvas id="cvs" width="400" height="400" style="background-color:blanchedalmond"></canvas>
+</body>
+
+</html>

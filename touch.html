@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0, user-scalable=0" />
+    <title>ES6</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+    <script type="text/javascript" src="http://api.map.baidu.com/api?v=1.2"></script>
+    <style>
+        /* html {
+            font-size: 10px
+        }
+
+        #pageContent {
+            width: 100%;
+            height: auto;
+            position: relative;
+            overflow: hidden;
+        } */
+
+        /* ul {
+            margin: 0;
+            padding: 0;
+            width: 999rem;
+            height: auto;
+            transform: translateX(0rem);
+            overflow: hidden;
+        }
+
+        ul li {
+            width: 62rem;
+            height: auto;
+            float: left;
+            list-style: none;
+        }
+
+        ul li img {
+            width: 100%;
+            height: auto;
+        }
+
+        ol {
+            width: 40rem;
+            position: absolute;
+            bottom: 1rem;
+            right: 11rem;
+            z-index: 999;
+        }
+
+        ol li {
+            width: 2rem;
+            height: 2rem;
+            float: left;
+            border: 1px solid red;
+            border-radius: 2rem;
+            list-style: none;
+            margin: 0rem 5%;
+        } */
+
+        .active {
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div id="pageContent">
+        <ul id="carousel">
+            <li><img src="https://gw.alicdn.com/imgextra/i2/136/O1CN016lx5v81CsKQFSPeyG_!!136-0-lubanu.jpg" /></li>
+            <li><img src="https://gw.alicdn.com/imgextra/i3/61/O1CN01LSvGQv1CJyiWC7ZMR_!!61-0-lubanu.jpg" /></li>
+            <li><img src="https://gw.alicdn.com/imgextra/i2/47/O1CN013hKMJ21CDZAfDrVeR_!!47-0-lubanu.jpg" /></li>
+            <li><img src="https://gw.alicdn.com/imgextra/i1/95/O1CN01OS2H251CZYBIrgDjV_!!95-0-lubanu.jpg" /></li>
+            <li><img src="https://gw.alicdn.com/imgextra/i3/140/O1CN01ju8Zg11CuA0IkQ1ZT_!!140-0-lubanu.jpg" /></li>
+        </ul>
+        <ol id="circle">
+             <li class="oli active"></li>
+            <li class="oli"></li>
+            <li class="oli"></li>
+            <li class="oli"></li>
+            <li class="oli"></li> 
+        </ol>
+    </div> -->
+    <div id="img_content" style="width:100%; height:auto">
+
+    </div>
+</body>
+<script>
+    window.onload = () => {
+        let imgList = ["https://gw.alicdn.com/imgextra/i2/136/O1CN016lx5v81CsKQFSPeyG_!!136-0-lubanu.jpg", "https://gw.alicdn.com/imgextra/i3/61/O1CN01LSvGQv1CJyiWC7ZMR_!!61-0-lubanu.jpg", "https://gw.alicdn.com/imgextra/i2/47/O1CN013hKMJ21CDZAfDrVeR_!!47-0-lubanu.jpg", "https://gw.alicdn.com/imgextra/i1/95/O1CN01OS2H251CZYBIrgDjV_!!95-0-lubanu.jpg", "https://gw.alicdn.com/imgextra/i3/140/O1CN01ju8Zg11CuA0IkQ1ZT_!!140-0-lubanu.jpg"]
+        function car(imgList, contentId) {
+            // dom根节点字体大小
+            let font = parseInt(getComputedStyle(window.document.documentElement)['font-size']);
+            // 轮播图图片数量
+            let count = imgList.length || 0;
+            // 轮播图图片宽度 
+            let width = parseInt(window.getComputedStyle(document.getElementById(contentId)).width) || window.screen.width;
+            // translateX平移距离
+            let x = 0;
+            // 创建轮播图容器
+            let content = document.createElement('div');
+            content.style.cssText = "width:100%;" + "height:auto;" + "position:relative;" + "overflow:hidden;";
+            // 创建轮播容器
+            let ul = document.createElement('ul');
+            ul.id = "carousel";
+            ul.style.cssText = "margin:0;" + "padding:0;" + "width:999rem;" + "height:auto;" + "transform:translateX(0rem);" + "overflow:hidden;";
+            // 创建指示器容器
+            let olDiv = document.createElement('div');
+            olDiv.style.cssText = "width:100%;" + "position:absolute;" + "bottom:1rem;" + "z-index:999;" + `left:0rem;`;
+            let ol = document.createElement('ol');
+            ol.id = "circle";
+            ol.style.cssText = "width:30%;" + "display:flex";
+            ol.style.padding = 0
+            ol.style.margin = "0 auto"
+            olDiv.appendChild(ol)
+            // 生成轮播每个图片元素
+            imgList.forEach((e, index) => {
+                // 生成图片节点
+                let uli = document.createElement('li');
+                uli.innerHTML = `<img style= "width:100%; height:auto " src="${e}" />`;
+                uli.style.cssText = `width:${width / font}rem;float:left;list-style:none;`;
+                ul.appendChild(uli);
+                // 生成指示器节点
+                let oli = document.createElement('li');
+                oli.classList.add("oli");
+                if (index === 0) oli.classList.add("active");
+                oli.style.cssText = "width:0.5rem;" + "height:0.5rem;" + "float:left;" + "border:1px solid red;" + "border-radius:0.25rem;" + "list-style:none;" + "margin:0 auto;";
+                oli.onclick = () => {
+                    let oli = document.getElementsByClassName("oli")
+                    Array.prototype.slice.call(oli).forEach(e => {
+                        e.classList.remove("active")
+                    })
+                    oli[index].classList.add("active")
+                    x = -index*width
+                    // console.log(x)
+                    carousel.style.transition = `500ms all ease`
+                    carousel.style.transform = `translateX(${-Math.round(Math.abs(x) / width) * (width / font)}rem)`
+                }
+                ol.appendChild(oli);
+            })
+            // 生成轮播dom 放入body
+            content.appendChild(ul);
+            content.appendChild(olDiv);
+            // document.body.appendChild(content);
+            document.getElementById(contentId).appendChild(content)
+            // 开启轮播定时器
+            count > 1 && setInterval(() => {
+                if (x <= 0 && x >= -width * count) {
+                    x = x - width
+                    let index = Math.round(Math.abs(x) / width)
+                    // console.log("index:", index)
+                    if (index < count) {
+                        let oli = document.getElementsByClassName("oli")
+                        Array.prototype.slice.call(oli).forEach(e => {
+                            e.classList.remove("active")
+                        })
+                        oli[index].classList.add("active")
+                        console.log(carousel)
+                        carousel.style.transition = `500ms all ease`
+                        carousel.style.transform = `translateX(${-Math.round(Math.abs(x) / width) * (width / font)}rem)`
+                    }
+                    if (index === count) {
+                        let oli = document.getElementsByClassName("oli")
+                        Array.prototype.slice.call(oli).forEach(e => {
+                            e.classList.remove("active")
+                        })
+                        oli[0].classList.add("active")
+                        carousel.style.transition = `500ms all ease`
+                        carousel.style.transform = `translateX(${0}rem)`
+                        x = 0
+                    }
+                }
+            }, 1500)
+            carousel.addEventListener("touchstart", function (e) {
+                let disX = e.targetTouches[0].clientX - x
+                function fnMove(e) {
+                    if ((e.targetTouches[0].clientX - disX) < 0 && (e.targetTouches[0].clientX - disX) > -(width * (count - 1))) {
+                        x = e.targetTouches[0].clientX - disX
+                        let index = Math.round(Math.abs(x) / width)
+                        let oli = document.getElementsByClassName("oli")
+                        Array.prototype.slice.call(oli).forEach(e => {
+                            e.classList.remove("active")
+                        })
+                        oli[index].classList.add("active")
+                        carousel.style.transition = `500ms all ease`
+                        carousel.style.transform = `translateX(${-Math.round(Math.abs(x) / width) * (width / font)}rem)`
+                    }
+                }
+                function fnEnd() {
+                    carousel.removeEventListener("touchmove", fnMove, false)
+                    carousel.removeEventListener("touchend", fnEnd, false)
+                }
+                carousel.addEventListener("touchmove", fnMove, false)
+                carousel.addEventListener("touchend", fnEnd, false)
+            }, false)
+        }
+        car(imgList, "img_content")
+    }
+    // let carousel = document.getElementById("carousel")
+    // let x = 0;
+    // setInterval(() => {
+    //     if (x <= 0 && x >= -3110) {
+    //         x = x - 620
+    //         let index = Math.round(Math.abs(x) / 620)
+    //         console.log("index:", index)
+    //         if (index < 5) {
+    //             let oli = document.getElementsByClassName("oli")
+    //             Array.prototype.slice.call(oli).forEach(e => {
+    //                 e.classList.remove("active")
+    //             })
+    //             oli[index].classList.add("active")
+    //             carousel.style.transition = `500ms all ease`
+    //             carousel.style.transform = `translateX(${-Math.round(Math.abs(x) / 620) * 62}rem)`
+    //         }
+    //         if (index === 5) {
+    //             let oli = document.getElementsByClassName("oli")
+    //             Array.prototype.slice.call(oli).forEach(e => {
+    //                 e.classList.remove("active")
+    //             })
+    //             oli[0].classList.add("active")
+    //             carousel.style.transition = `500ms all ease`
+    //             carousel.style.transform = `translateX(${0}rem)`
+    //             x = 0
+    //         }
+    //     }
+    // }, 3000)
+    // carousel.addEventListener("touchstart", function (e) {
+    //     let disX = e.targetTouches[0].clientX - x
+    //     function fnMove(e) {
+    //         if ((e.targetTouches[0].clientX - disX) < 0 && (e.targetTouches[0].clientX - disX) > -2480) {
+    //             x = e.targetTouches[0].clientX - disX
+    //             let index = Math.round(Math.abs(x) / 620)
+    //             let oli = document.getElementsByClassName("oli")
+    //             Array.prototype.slice.call(oli).forEach(e => {
+    //                 e.classList.remove("active")
+    //             })
+    //             oli[index].classList.add("active")
+    //             carousel.style.transition = `500ms all ease`
+    //             carousel.style.transform = `translateX(${-Math.round(Math.abs(x) / 620) * 62}rem)`
+    //         }
+    //     }
+    //     function fnEnd() {
+    //         carousel.removeEventListener("touchmove", fnMove, false)
+    //         carousel.removeEventListener("touchend", fnEnd, false)
+    //     }
+    //     carousel.addEventListener("touchmove", fnMove, false)
+    //     carousel.addEventListener("touchend", fnEnd, false)
+    // }, false)
+</script>
+
+</html>

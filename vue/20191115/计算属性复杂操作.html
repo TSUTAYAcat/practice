@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>计算属性复杂操作</title>
+</head>
+<body>
+    <div id="app">总价格：{{totalPrice}}</div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el:"#app",
+            data:{
+                bookList:[
+                    {id:1,name:"万物简史",price:99.00},
+                    {id:2,name:"数学原理",price:109.00},
+                    {id:3,name:"计算机操作系统",price:190.00},
+                    {id:4,name:"现代的操纵系统",price:100.00},
+                ]
+            },
+            computed:{
+                totalPrice: function (){
+                   return this.bookList.reduce((pre,next)=>{
+                       return pre=pre+next.price
+                    },0)
+                }
+            }
+        })
+    </script>
+</body>
+</html>

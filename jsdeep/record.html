@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    let str = `Actions.login({ type: ActionConst.POP_TO });
+    Actions.home({ type:ActionConst.RESET, refresh: true });
+  // Actions.popTo('orderConfirm', { type: ActionConst.POP_TO });
+  // Actions.addInvoice({ changetype: 'addInvoice' });
+  Actions.popTo('productDetails',{type:ActionConst.REPLACE,refresh:true});
+  Actions.VideoScreenshow({ fileUrl: item.url, flag: true });
+  Actions.login({ type: ActionConst.REPLACE });
+  Actions.home({ refresh: true });
+  Actions.xgProductList({ type: ActionConst.REPLACE });
+  Actions.popTo('cart', { refresh: true });
+  Actions.popTo('home', { type: ActionConst.POP_TO, login: true })
+  Actions.popTo('home', {
+            type: ActionConst.POP_TO, login: true
+          });
+    // Actions.successfulPayment({ type: ActionConst.REPLACE,orderNo:payOrderCode });
+    Actions.popTo('home', { type: ActionConst.POP_TO, login: true })
+    // Actions.popTo('refundSchedule', { refresh: true });
+    // Actions.xgOrderDetail({ type: ActionConst.REPLACE, refresh: true, afterSalesOrder: 'afterSalesOrder' });
+    // Actions.xgOrderDetail({ type: ActionConst.REPLACE, refresh: true, orderNotification: 'orderNotification' });
+    // Actions.popTo('xgOrderDetail', { refresh: true });
+    // Actions.applyRefundView({ type: ActionConst.REPLACE, });
+    // Actions.applyRefundView({ type: ActionConst.REPLACE, });
+    // Actions.xgOrderDetail({ type: ActionConst.REPLACE, refresh: true, orderNotification: 'orderNotification' });
+    // Actions.xgOrderDetail({ type: ActionConst.REPLACE, refresh: true, afterSalesOrder: 'afterSalesOrder' });
+    // Actions.popTo('xgOrderDetail', { refresh: true });
+    // Actions.popTo('xgOrderDetail', { refresh: true });
+    Actions.VideoScreen({ fileUrl: refundVideos[0].refundVideoUrl, flag: true });
+    Actions.installationPage({ installationData: data });
+    Actions.home({ login: false });
+    Actions.login({ type: ActionConst.POP_TO });
+    Actions.home({ type:ActionConst.RESET,refresh: true });
+    Actions.EvaluationDetail({type:ActionConst.REPLACE,item:this.props.item});
+    // Actions.classify({type:ActionConst.REPLACE});
+    // Actions.productDetails({type:ActionConst.REPLACE});
+    Actions.PublishEvaluation({type:ActionConst.REPLACE, mainOrderNo:item.mainOrderNo,skuCode:item.skuCode,skuName:item.skuName,imageUrl:item.imageUrl,payOrderNo:item.payOrderNo });
+    Actions.PublishEvaluation({ mainOrderNo:item.mainOrderNo,skuCode:item.skuCode,skuName:item.skuName,imageUrl:item.imageUrl,payOrderNo:item.payOrderNo });
+    Actions.EvaluationDetail({item:item});
+    Actions.orderConfirm({tempCartItemList:params});
+    Actions.VideoScreen({ fileUrl: videoList[0].refundVideoUrl, flag: true });
+    Actions.login({ type:ActionConst.RESET,refresh: true });
+    // Actions.xgProductList({ type: ActionConst.REPLACE });
+    Actions.popTo('home', { type: ActionConst.POP_TO, login: true });
+    Actions.orderConfirm({ tempCartItemList: data, pointOfServiceCode , scanBuy });
+    Actions.popTo('home', { type: ActionConst.POP_TO, login: true });
+    // Actions.qrCode({ orderId, payType, tipMsg, orderPageIndex, payChannelNo, totalPrice, payMount });
+    // Actions.applyRefundGoods({isGroupSingle});
+    // Actions.insuranceRefund({type: ActionConst.REPLACE, orderSN, dispatchOrderSN, pOrderSN});
+    // Actions.applyRefund({isGroupSingle});
+    Actions.authorize({ isBind: true });
+    Actions.home({ type:ActionConst.RESET, refresh: true });
+    // Actions.qualificationDetail({ type: ActionConst.REPLACE });
+    Actions.popTo('productDetails',{type:ActionConst.REPLACE,refresh:true});
+    Actions.EvaluationSuccess({ type: ActionConst.REPLACE, item: payload });
+    Actions.productDetails({ pointOfServiceCode: data.data.param.storeCode, scanBuy: 1 });
+    Actions.login({ type: ActionConst.RESET, login: true });
+    Actions.ChatMessages({ isFromCreateGroup: true, groupChatInfo: chatInfo });
+    // Actions.orderInfo({ orderSN, userPhone, fromChannel, posIndex: index });
+    // Actions.orderInfo({ orderSN, userPhone, fromChannel, posIndex: index });
+    // Actions.orderInfo({ orderSN, userPhone, fromChannel });
+    // Actions.orderInfo({ orderSN: itm.orderSN, userPhone: itm.userPhone, fromChannel: itm.fromChannel });
+    // Actions.companyTransfer({ from: 'orderInfo', orderId: itm.orderSN, });
+`
+          str = str.replace(/\s+/g,'')
+          console.log(str)
+          str = str.split(';')
+          console.log(str)
+          str = [...new Set(str)]
+          console.log(str)
+          str.pop()
+          console.log(str)
+          str = str.join(';<br/>')
+          console.log(str)
+          document.writeln(str)
+</script>
+
+</html>

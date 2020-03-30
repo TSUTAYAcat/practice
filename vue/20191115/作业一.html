@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作业一</title>
+    <style>
+        .active {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <ul id="app">
+        <li  v-for="(item,i) in movies" :class="classList(i)" @click="click(i)">{{item}}</li>
+    </ul>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                movies: ["海尔兄弟", "我的兄弟叫顺溜", "火影忍者", "黑洞频率"],
+                isActive: -1
+            },
+            methods: {
+                click: function (i) {
+                    this.isActive = i;
+                },
+                classList: function (i) {
+                    if (this.isActive === i) {
+                        return ["active"]
+                    }
+                    return []
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ES6</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"> </script>
+    <style></style>
+</head>
+
+<body>
+    <!-- <form action="http://localhost:8080/login" method="get"> -->
+    用户名： <input type="text" id="user" /><br />
+    密码： <input type="password" id="password" /><br />
+    <input type="button" id="button" value="登录" />
+    </form>
+    <script>
+        $(function () {
+            $("#button").click(() => {
+                $.ajax({
+                    url: "/login",
+                    data: { user: $("#user").val(), password: $("#password").val() },
+                    dataType: "JSON",
+                    success(data) {
+                        if (data.error) {
+                            alert(`错了${data.msg}`)
+                        } else {
+                            alert(`成功`)
+                        }
+                    },
+                    error() {
+                        aler('错了')
+                    }
+                })
+            })
+        })
+    </script>
+</body>
+
+</html>

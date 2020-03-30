@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>a hungry snake</title>
+    <style>
+        .map {
+            width: 800px;
+            height: 800px;
+            background-color: teal;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- <div class="map"></div> -->
+    <canvas id = "canvas" width="500" height="500" style="background-color: teal;" ></canvas>
+    <script>
+        let canvas = document.getElementById('canvas');
+        let ctx = canvas.getContext('2d')
+     
+       
+        ctx.fillStyle = 'red'
+        ctx.fillRect(0,0,300,300)
+
+        ctx.rotate(10*Math.PI/180)
+        ctx.fillStyle = 'black'
+        ctx.fillRect(0,0,150,150)
+        
+        ctx.rotate(10*Math.PI/180)
+        ctx.fillStyle = 'blue'
+        ctx.fillRect(0,0,75,75)
+    </script>
+</body>
+<script>
+    (function () {
+
+        function Food(width, height, x, y, color) {
+            this.width = width || 20
+            this.height = height || 20
+            this.x = x || 0
+            this.y = y || 0
+            this.color = color || 'red'
+            this.foodArr = []
+        }
+        Food.prototype.init = function (map) {
+            this.foodArr.forEach(e => {
+                e.parentNode.removeChild(e)
+            })
+            this.foodArr = []
+            let ele = document.createElement('div')
+            ele.style.width = this.width + 'px'
+            ele.style.height = this.height + 'px'
+            ele.style.backgroundColor = this.color
+            this.x = parseInt((map.offsetWidth / this.width) * Math.random())
+            this.y = parseInt((map.offsetHeight / this.height) * Math.random())
+            ele.style.left = this.width * this.x + 'px'
+            ele.style.top = this.height * this.y + 'px'
+            ele.style.position = 'absolute'
+            this.foodArr.push(ele)
+            map.appendChild(ele)
+
+        }
+        window.Food = Food
+    }());
+
+    (function () {
+        let eleArr = []
+
+        function Snake(width, height, direction) {
+            this.width = width || 20
+            this.height = height || 20
+            this.direction = direction || 'right'
+            this.snake = [
+                { x: 3, y: 1, color: "blue" },
+                { x: 2, y: 1, color: "red" },
+                { x: 1, y: 1, color: "red" },
+            ]
+        }
+        function remove(nodeList) {
+            nodeList.forEach(e => {
+                e.parentNode.removeChild(e)
+            })
+        }
+        Snake.prototype.init = function (map) {
+            remove(eleArr)
+            eleArr = []
+            this.snake.forEach(e => {
+                let div = document.createElement('div')
+                div.style.width = this.width + 'px'
+                div.style.height = this.height + 'px'
+                div.style.position = 'absolute'
+                div.style.left = e.x * this.width + 'px'
+                div.style.top = e.y * this.height + 'px'
+                div.style.backgroundColor = e.color
+                map.appendChild(div)
+                eleArr.push(div)
+            })
+        }
+        Snake.prototype.move = function (map) {
+            // 身体移动
+            for (let i = this.snake.length - 1; i > 0; i--) {
+                this.snake[i].x = this.snake[i - 1].x;
+                this.snake[i].y = this.snake[i - 1].y;
+            }
+            // 头移动
+            switch (this.direction) {
+                case 'right': this.snake[0].x += 1; break;
+                case 'bottom': this.snake[0].y += 1; break;
+                case 'left': this.snake[0].x -= 1; break;
+                case 'top': this.snake[0].y -= 1; break;
+            }
+        }
+        window.Snake = Snake
+    }());
+
+    (function () {
+        function Game(map) {
+            this.foo = new Food()
+            this.snake = new Snake()
+            this.map = map
+        }
+        Game.prototype.init = function () {
+            this.foo.init(this.map)
+            let timer = setInterval(() => {
+                let x = this.snake.snake[0].x
+                let y = this.snake.snake[0].y
+                if (x < 0 || x >= this.map.offsetWidth / this.snake.width || y < 0 || y >= this.map.offsetHeight / this.snake.height) {
+                    clearInterval(timer); alert("游戏结束")
+                } else {
+                    if (x === this.foo.x && y === this.foo.y) {
+                        this.snake.snake.push({
+                            x: this.snake.snake[this.snake.snake.length - 1].x,
+                            y: this.snake.snake[this.snake.snake.length - 1].y,
+                            color: this.snake.snake[this.snake.snake.length - 1].color,
+                        }); this.foo.init(this.map)
+                    }
+                }
+                this.snake.init(this.map)
+                this.snake.move(this.map)
+
+            }, 150)
+        }
+        Game.prototype.changeDirection = function () {
+            document.addEventListener('keydown', (e) => {
+                switch (e.which) {
+                    case 37: this.snake.direction = "left"; break;
+                    case 38: this.snake.direction = "top"; break;
+                    case 39: this.snake.direction = "right"; break;
+                    case 40: this.snake.direction = "bottom"; break;
+                }
+            }, false)
+        }
+        const game = new Game(document.querySelector('.map'))
+        game.init()
+        game.changeDirection()
+    }());
+</script>
+
+</html>

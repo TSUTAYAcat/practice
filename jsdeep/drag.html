@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #box {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            width: 250px;
+            height: 250px;
+            background-color: teal;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='box'></div>
+    <script>
+        const box = document.getElementById('box');
+        let x, y;
+        var isDrop = false;//移动状态的判断鼠标按下才能移动
+        box.onmousedown = function (e) {
+            console.log(e.clientX)
+            var e = e || window.event;//要用event这个对象来获取鼠标的位置
+            x = e.clientX - box.offsetLeft;
+            y = e.clientY - box.offsetTop;
+            isDrop = true;//设为true表示可以移动
+        }
+        document.onmousemove = function(e) {
+            // console.log(e)
+　　　　　　　　　//是否为可移动状态
+　　　　　　　　　if(isDrop) {
+                　　　　var e = e || window.event;
+              
+                   　　 var moveX = e.clientX - x;//得到距离左边移动距离
+                   　　 var moveY = e.clientY - y;//得到距离上边移动距离
+                  
+                   　　 box.style.left = moveX + "px";
+                    　　box.style.top = moveY + "px";
+　　　　　　　　　　}else{
+                       return ;
+　　　　　　　　　　}
+
+            }
+            document.onmouseup = function(e) {
+　　　　　　　　　isDrop = false
+
+            }
+    </script>
+</body>
+
+</html>

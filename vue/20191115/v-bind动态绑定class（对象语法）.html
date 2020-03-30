@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-bind动态绑定class（对象语法） </title>
+    <style>
+        .active{
+            color: pink;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <!-- 效果见控制台审查元素 -->
+        <p class="title">百度一下</p>
+        <p class="title" :class=active>百度一下</p>
+        <!-- 对象语法 -->
+        <p class="title">百度一下</p>
+        <p class="title" :class="{active: isActive}">百度一下</p>
+        <button @click = "changeActive">点击</button>
+    </div>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                title: "title",
+                active:"active",
+                isActive:true,
+            },
+            methods:{
+                changeActive:function(){
+                    this.isActive=!this.isActive
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

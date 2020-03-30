@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>01父子组件通信父传子props </title>
+</head>
+
+<body>
+    <div id="app">
+        <mycpn :mybooks="books" :title="title"></mycpn>
+    </div>
+    <template id="cpn">
+        <div>
+            <div v-for="item in mybooks">{{item}}</div>
+            <div v-for="item in country">{{item}}</div>
+            <p>{{title}}</p>
+        </div>
+    </template>
+    <script src="../vue.js"></script>
+    <script>
+        const app = new Vue({
+            el: "#app",
+            data: {
+                books: ["百年孤独", "西游记", "水浒传"],
+                title: "书画",
+
+                country:["China","Russia","American"]
+            },
+            components: {
+                mycpn: {
+                    template: "#cpn",
+
+                    // props: ["mybooks"],
+                    // props: {
+                    //     mybooks : Array
+                    // }
+                    props: {
+                        mybooks: {
+                            type: Array,
+                        },
+                        title: {
+                            type: String,
+                            default: "书架",
+                            required: true,
+                        },
+                        country:{
+                            type:Array,
+                            default(){
+                                return ["China","Russia","American","England"]
+                            }
+                        }
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>
