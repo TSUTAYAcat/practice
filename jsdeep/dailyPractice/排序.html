@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>排序</title>
+</head>
+
+<body>
+    <div id="#click">点击</div>
+    <ul>
+        <li>1</li>
+        <li>1</li>
+    </ul>
+</body>
+<script>
+
+    // 快速排序
+    function quickSort(arr) {
+        if (arr.length < 2) {
+            return arr
+        }
+        let len = ~~(arr.length / 2)
+        // console.log(len)
+        let mid = arr.splice(len, 1)
+        // console.log(mid)
+        let left = []
+        let right = []
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] <= mid) {
+                left.push(arr[i])
+            } else {
+                right.push(arr[i])
+            }
+        }
+        return quickSort(left).concat(mid, quickSort(right))
+    }
+    // 冒泡排序 ——初级
+    function bubbleSort(arr) {
+        for (let i = 0; i < arr.length - 1; i++) {
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    let temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp
+                }
+            }
+        }
+        return arr
+    }
+    // 冒泡排序 ——中级
+    function bubbleSort_mid(arr) {
+        for (let i = 0; i < arr.length; i++) {
+            for (let j = arr.length - 1; j > i; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    let temp = arr[j]
+                    arr[j] = arr[j - 1]
+                    arr[j - 1] = temp
+                }
+            }
+        }
+
+        return arr
+    }
+    // 冒泡排序 ——  optimize
+    function bubbleSort_optimize(arr) {
+        let flag = true
+        for (let i = 0; i < arr.length && flag; i++) {
+            flag = false
+            for (let j = arr.length - 1; j > i; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    let temp = arr[j]
+                    arr[j] = arr[j - 1]
+                    arr[j - 1] = temp
+                    flag = true
+                }
+            }
+        }
+
+        return arr
+    }
+    // 插入排序
+    function insertSort(arr) {
+        for (let i = 1; i < arr.length; i++) {
+            for (let j = i; j > 0; j--) {
+                if (arr[j] < arr[j - 1]) {
+                    let temp = arr[j]
+                    arr[j] = arr[j - 1]
+                    arr[j - 1] = temp
+                } else {
+                    break
+                }
+            }
+        }
+        return arr
+    }
+    console.log(quickSort([3, 2, 2, 9, 30, 10]));
+    console.log(bubbleSort([3, 2, 2, 9, 30, 10]));
+    console.log(bubbleSort_mid([3, 2, 2, 9, 30, 10]));
+    console.log(bubbleSort_optimize([3, 2, 2, 9, 30, 10]));
+    console.log(insertSort([3, 2, 2, 9, 30, 10]));
+    // 选择排序
+    function selectSort(arr) {
+        for (let i = 0; i < arr.length - 1; i++) {
+            let index_min = i
+            for (let j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[index_min]) {
+                    index_min = j
+                }
+            }
+            [arr[i], arr[index_min]] = [arr[index_min], arr[i]]
+        }
+        return arr
+    }
+    console.log(selectSort([3, 2, 2, 9, 30, 10]));
+    // flat数组 
+    function flatArr(arr) {
+        let arrTemp = []
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] instanceof Array) {
+                arrTemp = arrTemp.concat(flatArr(arr[i]))
+            } else {
+                arrTemp.push(arr[i])
+            }
+        }
+        return arrTemp
+    }
+    console.log(flatArr([1, [2, 3], [4], [5, [6, 7], 8], 9]))
+    // flat数组
+    function flat_re(arr) {
+        return arr.reduce((pre, next) => {
+            return Array.isArray(next) ? pre.concat(flat_re(next)) : (pre.push(next), pre)
+        }, [])
+
+    }
+    console.log(flat_re([1, [2, 3], [4], [5, [6, 7], 8], 9]))
+    // 原生ajax
+    function ajax_my() {
+        let request = window.XMLHttpRequest ? new window.XMLHttpRequest() : new ActiveXObject();
+        request.onreadystatechange = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                console.log(request.responseText)
+            }
+        }
+        request.open(method, url, true)
+        request.send()
+    }
+    // 节流 
+    function thottle(fn, t) {
+        let flag = true;
+        return function () {
+            if (flag) {
+                flag = false
+                fn()
+                setTimeout(() => {
+                    flag = true
+                }, t)
+            }
+        }
+    }
+    function log2() {
+        console.log(2)
+    }
+    document.getElementById('#click').onclick = thottle(log2, 2000)
+    // 防抖 debounce
+    function debounce(fn, t) {
+        let timer = null
+        return function () {
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(fn, t)
+        }
+    }
+    function mmove() {
+        console.log(2)
+    }
+    window.onmousemove = debounce(mmove, 1000)
+    // deepClone Object
+    function deepCloneObj(obj,newObj) {
+        for (let key in obj) {
+            if (obj[key] instanceof Array) {
+                newObj[key] = []
+                deepCloneObj(obj[key], newObj[key])
+            } else if (obj[key] instanceof Object) {
+                newObj[key] = {}
+                deepCloneObj(obj[key], newObj[key])
+            } else {
+                newObj[key] = obj[key]
+            }
+        }
+        return newObj
+    }
+    console.log(deepCloneObj({ a: 1, b: { c: 2 } },{}))
+</script>
+
+</html>
