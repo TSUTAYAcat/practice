@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // async 实现
+    function* gen() {
+        let a = yield Promise.resolve(1)
+        console.log(a)
+        let b = yield a + 3
+        console.log(b)
+        let c = yield b + 3
+        console.log(c)
+    }
+    function run(gen) {
+        // return new Promise 因为async
+        // 微任务 promise包裹产生async 顺序 
+        return new Promise((resolve, reject) => {
+            let g = gen()
+            let data = g.next()
+            function step(data) {
+                if (data.done) {
+                    return resolve(data.value)
+                }
+                Promise.resolve(data.value).then(e => {
+                    step(g.next(e))
+                })
+            }
+            step(data)
+        })
+    }
+    console.log(run(gen))
+    Promise.resolve(1).then(e => { console.log(1, 'e') }).then(e => { console.log('e') })
+
+</script>
+
+</html>

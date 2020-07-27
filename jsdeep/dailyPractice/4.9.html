@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>reg</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 1 . 给一个连字符串例如：get-element-by-id转化成驼峰形式
+    (function () {
+        let str = 'get-element-by-id'
+        let str_ = str.replace(/-([a-z])/g, (...args) => {
+            return args[1].toUpperCase()
+        })
+        console.log(str_)
+    })();
+    // 匹配二进制数字
+    (function () {
+        let str = '10101010101011'
+        let reg = /^[01]+$/
+        console.log(reg.test(str))
+    })();
+    // 3 . 非零的十进制数字 (有至少一位数字, 但是不能以0开头)
+    (function () {
+        let str = '10101010101011'
+        let reg = /^(?<!0)\d+$/
+        console.log(reg.test(str))
+    })();
+    (function () {
+        const fn = function (a, b) {
+            const obj = {
+                func: (a, b) => {
+                    console.log(this, arguments, obj.func.prototype, a, b)
+                }
+            }
+            return obj
+        }
+        const obj = fn(1, 2)
+        obj.func(3)
+    })();
+
+    function Base(a) {
+        this.a = a 
+    }
+    Base.prototype.c=3
+    function Subclass(a,b) {
+        Base.call(this,a)
+        this.b = b
+    }
+    Subclass.prototype = Base.prototype
+    let oj = new Subclass(1,2)
+    console.log(oj.a,oj.b,oj.c)
+</script>
+
+</html>

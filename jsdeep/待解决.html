@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+
+
+    async function gene() {
+        await Promise.resolve(1)
+        console.log('gen1')
+        await console.log('&&')
+        console.log('gen2')
+        await 3
+        console.log('gen3')
+        await 4
+        console.log('gen4')
+        await 5
+        console.log('gen5')
+        await 6
+        console.log('gen6')
+    }
+    // setTimeout(() => { console.log('s1') }, 0);
+    gene();
+    Promise.resolve(1)
+        .then(e => { console.log('p1'); return new Promise(resolve=>{ resolve(1)}) })
+        .then(e => { console.log('p2') }) .then(e => { console.log('p3') })
+
+    // gen1 && p1 erz gen2 gen3 
+    // var a = 0
+    // if (true) {
+    //     a = 1
+    //     function a() { }
+    //     a = 21
+    //     console.log('inner', a)
+    // }
+    // console.log('out', a)
+
+    // var a //  提升到头部
+    // var a = 0
+    // if (true) {
+    //     function a() { } //  提升到头部； 在这块 相当于在if(true)上面 来一次a = function a (){}? 是这意思吗·
+    //     a = 1
+    //     a = 21
+    //     console.log('inner', a)
+    // }
+    // console.log('out', a)
+</script>
+
+</html>

@@ -1,0 +1,176 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-25 09:25:15
+ * @LastEditTime: 2020-05-25 12:56:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /study/jsdeep/Promise1.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const PENDING = 'pending'
+        const RESOLVED = ' resolved'
+        const REJECTED = ' rejected'
+
+        function Promise1(excutor) {
+            const self = this
+            self.status = PENDING
+            self.value = null
+            self.reason = null
+            self.resolveQue = []
+            self.rejectQue = []
+
+            const resolve = (value) => {
+                if (value instanceof Promise1) {
+                    return value.then(resolve, reject)
+                }
+                if (self.status === PENDING) {
+                    setTimeout(() => {
+                        self.status = RESOLVED
+                        self.value = value
+                        self.resolveQue.forEach(fn => {
+                            fn(self.value)
+                        })
+                    }, 0)
+                }
+            }
+            const reject = (reason) => {
+                if (self.status === PENDING) {
+                    setTimeout(() => {
+                        self.status = REJECTED
+                        self.reason = reason
+                        self.rejectQue.forEach(fn => {
+                            fn(self.reason)
+                        })
+                    }, 0);
+                }
+            }
+            try {
+                excutor(resolve, reject)
+            } catch (error) {
+                reject(error)
+            }
+        }
+        function midstFn(x, promise2, resolve, reject) {
+            if (x === promise2) {
+                return reject(new TypeError('dead circle'))
+            }
+            let called = false
+            if (x instanceof Promise1) {
+                if (x.status === PENDING) {
+                    x.then(y => {
+                        midstFn(y, promise2, resolve, reject)
+                    }, e => {
+                        reject(e)
+                    })
+                } else {
+                    x.then(resolve, reject)
+                }
+            } else if (x != null && ((typeof x === 'function') || (typeof x === ' object'))) {
+                try {
+                    let then = x.then
+                    if (typeof then === ' function') {
+                        then.call(x, y => {
+                            if (called) {
+                                return
+                            }
+                            called = true
+                            midstFn(y, promise2, resolve, reject)
+                        }, e => {
+                            if (called) {
+                                return
+                            }
+                            called = true
+                            reject(e)
+                        })
+
+                    } else {
+                        resolve(x)
+                    }
+                } catch (error) {
+                    if (called) {
+                        return
+                    }
+                    called = true
+                    reject(error)
+                }
+            } else {
+                resolve(x)
+            }
+        }
+        Promise1.prototype.then = function (resolveFn, rejectFn) {
+            let self = this
+            resolveFn = typeof resolveFn === 'function' ? resolveFn : value => value
+            rejectFn = typeof rejectFn === 'function' ? rejectFn : err => { throw err }
+            let promise2 = new Promise1((resolve, reject) => {
+                if (self.status === RESOLVED) {
+                    setTimeout(() => {
+                        try {
+                            let x = resolveFn(self.value)
+                            midstFn(x, promise2, resolve, reject)
+                        } catch (error) {
+                            reject(error)
+                        }
+                    }, 0);
+                }
+                if (self.status === REJECTED) {
+                    setTimeout(() => {
+                        try {
+                            let x = rejectFn(self.reason)
+                            midstFn(x, promise2, resolve, reject)
+                        } catch (error) {
+                            reject(error)
+                        }
+                    }, 0);
+                }
+                if (self.status === PENDING) {
+                    self.rejectQue.push((reason) => {
+                        try {
+                            let x = rejectFn(self.reason)
+                            midstFn(x, promise2, resolve, reject)
+                        } catch (error) {
+                            reject(error)
+                        }
+                    })
+                    self.resolveQue.push((value) => {
+                        try {
+                            let x = resolveFn(value)
+                            midstFn(x, promise2, resolve, reject)
+                        } catch (error) {
+                            reject(error)
+                        }
+                    })
+
+                }
+            })
+            return promise2
+        }
+        Promise1.prototype.catch = function (rejectFn) {
+            return this.then(null, rejectFn)
+        }
+        // 执行测试用例需要用到的代码
+        Promise1.deferred = function () {
+            let defer = {};
+            defer.promise = new Promise1((resolve, reject) => {
+                defer.resolve = resolve;
+                defer.reject = reject;
+            });
+            return defer;
+        }
+        try {
+            module.exports = Promise1
+        } catch (e) { }
+    </script>
+</body>
+
+</html>

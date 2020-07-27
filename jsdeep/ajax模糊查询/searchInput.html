@@ -1,0 +1,49 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-06-07 13:45:21
+ * @LastEditTime: 2020-06-07 16:43:55
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /study/jsdeep/ajax输入框模糊查询.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <div id='serach-input-wrapper' style="width: 220px;height: 20px;background-color: #f0f;position: relative;"></div>
+</body>
+<!-- 引入自定义模糊查询输入组件 -->
+<script src='./create.js'></script>
+<script>
+    // 为给定 ID 的 user 创建请求
+
+    // axios.defaults.headers.common['accessToken'] = 'XB595gKzLN33167X';
+
+    axios.get('http://172.26.9.168:8091/cashier/getPayDetailAndOrderInfo?saleChannelNo=122&orderNo=222')
+        .then(function (response) {
+            console.log(response);
+        })
+    // 使用组件
+    let hotWords = ['你好', '世界']
+    myinput('serach-input-wrapper', hotWords, "background-color: #f00", '', "background-color: #ff0;color:blue", true)
+   
+    $.ajax({
+        url: 'http://172.26.9.168:8091/cashier/getPayDetailAndOrderInfo?saleChannelNo=122&orderNo=222', success: (data) => {
+            console.log(data, 'dasda');
+        },
+        error: function (...args) {
+            console.log(args);
+        }
+    });
+</script>
+
+</html>

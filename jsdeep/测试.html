@@ -1,0 +1,1475 @@
+<!--
+ *                                                     __----~~~~~~~~~~~------___
+ *                                    .  .   ~~//====......          __--~ ~~
+ *                    -.            \_|//     |||\\  ~~~~~~::::... /~
+ *                 ___-==_       _-~o~  \/    |||  \\            _/~~-
+ *         __---~~~.==~||\=_    -_--~/_-~|-   |\\   \\        _/~
+ *     _-~~     .=~    |  \\-_    '-~7  /-   /  ||    \      /
+ *   .~       .~       |   \\ -_    /  /-   /   ||      \   /
+ *  /  ____  /         |     \\ ~-_/  /|- _/   .||       \ /
+ *  |~~    ~~|--~~~~--_ \     ~==-/   | \~--===~~        .\
+ *           '         ~-|      /|    |-~\~~       __--~~
+ *                       |-~~-_/ |    |   ~\_   _-~            /\
+ *                            /  \     \__   \/~                \__
+ *                        _--~ _/ | .-~~____--~-/                  ~~==.
+ *                       ((->/~   '.|||' -_|    ~~-/ ,              . _||
+ *                                  -_     ~\      ~~---l__i__i__i--~~_/
+ *                                  _-~-__   ~)  \--______________--~~
+ *                                //.-~~~-~_--~- |-------~~~~~~~~
+ *                                       //.-~~~--\
+ *                       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+ * 
+ *                               神兽保佑            永无BUG
+ -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src='./listener.js'></script>
+    <style>
+        .box {
+            width: 0px;
+            height: 0px;
+            /* background-color: orange; */
+            border: 10px solid red;
+            border-left-color: rgba(255, 255, 255, 0);
+            border-right-color: rgba(255, 255, 255, 0);
+            border-top-color: rgba(255, 255, 255, 0);
+        }
+
+        .out {
+            height: 500px;
+            width: 100%;
+            background-color: blanchedalmond;
+            position: relative;
+        }
+
+        .inner1 {
+            background-color: brown;
+            width: 100px;
+            height: 100px;
+            float: left;
+        }
+
+        .inner2 {
+            margin-left: 100px;
+            height: 100px;
+            background-color: yellow;
+
+        }
+
+        .inner11 {
+            background-color: brown;
+            width: 100px;
+            position: absolute;
+            height: 100%;
+        }
+
+        .inner22 {
+            left: 100px;
+            right: 0;
+            background-color: yellow;
+            height: 100%;
+        }
+
+
+
+        body,
+        html {
+            height: 100%;
+            padding: 0;
+            margin: 0
+        }
+
+        .left {
+            background: red;
+            width: 100px;
+            float: left;
+            margin-left: -100%;
+            position: relative;
+            left: -100px;
+            height: 100%;
+        }
+
+        .main {
+            background: blue;
+            width: 100%;
+            height: 100%;
+            float: left;
+        }
+
+
+        .right {
+            background: red;
+            width: 200px;
+            height: 100%;
+            float: left;
+            margin-left: -200px;
+            position: relative;
+            right: -200px;
+        }
+
+        .aside {
+            width: 100px;
+            height: 150px;
+            float: left;
+            background: #f66;
+        }
+
+        .main {
+            overflow: hidden;
+            height: 200px;
+            background: #fcc;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div style="width: 25vw;height: 25vw;padding:5vw;background-color: red;position: relative;">
+        <div style="background-color: #fff;width: 50%;height: 50%;position: absolute;top: 0;left: 0;"></div>
+    </div>
+    <div style="width: 25%;height: 25vw;background-color:black">
+
+    </div>
+    <div style="width: 25%;height: 0;padding-bottom: 25%;background-color:#ff0">
+
+    </div>
+    <div
+        style="width: 0;height: 0;border: 100px solid rebeccapurple;border-left-color: rgba(255, 255, 255, 0);border-right-color: rgba(255, 255, 255, 0);border-top-color: rgba(255, 255, 255, 0)">
+
+    </div>
+
+    <!-- <div class="aside"></div>
+    <div class="main"></div> -->
+    <!-- <div style="width: 100%;height: 400px;background-color: black;margin: 0;">
+        <div style="width: 100px;height: 100px;margin: 20px  20px;background-color: blanchedalmond;float: left;"></div>
+        <div style="overflow: hidden; margin-left: 300px; height: 100%;background-color: rebeccapurple;float: left;"></div>
+    </div> -->
+    <div style="width: 100%;height: 200px;background-color: #fff;margin: 0;"></div>
+    <div class="box"></div>
+    <input id='in' oninput="onInput()">
+
+    <div class="out">
+        <div class="inner11 ">1</div>
+        <div class="inner22 ">2</div>
+    </div>
+
+    <div
+        style="width: 100px;height: 100px;background-color: yellowgreen;display: flex;justify-content: center;margin-bottom: 100px;">
+        <div style="width: 50px;height: 50px;background-color: teal;align-self: center;"></div>
+    </div>
+
+    <div
+        style="width: 100%;height: 100px;background-color: teal;margin-bottom: 100px;display: flex;flex-direction: row;">
+        <div style="width: 300px;height: 100%;background-color: tan;">1</div>
+        <div style="flex:1; background-color: yellow;border: blanchedalmond solid 10px;">2</div>
+        <div style="width: 300px;height: 100%;background-color: tan;"></div>
+    </div>
+    <div style="width: 100%;height: 100px;background-color: teal;margin-bottom: 100px">
+        <div style="width: 300px;height: 100%;background-color: tan; float: left;">1</div>
+        <div style="width: 300px;height: 100%;background-color: tan; float: right;">3</div>
+        <div style="height: 100%; margin: 0 300px;background-color: blue;">2</div>
+    </div>
+    <div style="width: 100%;height: 100px;background-color: teal;margin-bottom: 100px;position: relative;">
+        <div style="width: 300px;height: 100%;background-color: tan;position: absolute;top: 0;left: 0;">1</div>
+        <div style="width: 300px;height: 100%;background-color: tan;position: absolute;top: 0;right: 0;"">3</div>
+        <div style=" height: 100%; margin: 0 300px;background-color: blue">2</div>
+    </div>
+    <div
+        style="padding-left: 100px;padding-right: 100px;box-sizing: border-box;width: 100%;height: 100px;margin-bottom: 100px;">
+        <div style="width: 100%;height: 100%;background-color: darkgray;float: left;">Main</div>
+        <div
+            style="float: left;width: 100px;height: 100%;background-color: rebeccapurple;margin-left: -100%;position: relative;left: -100px;">
+            Left</div>
+        <div
+            style="float: left;width: 100px;height: 100%;background-color: rebeccapurple;margin-left: -100px;position: relative;right: -100px;">
+            Left</div>
+    </div>
+    <div style="width: 100%;height: 100px;background-color: rebeccapurple;">
+        <div id='www' style="width: 100%;height: 100%;float: left;background-color: salmon;">
+            <div id='xxx' style="margin: 0 100px;background-color: red;height: 100%;">1</div>
+        </div>
+        <div style="width: 100px;height: 100%;float: left;background-color:seagreen;margin-left: -100%;">left</div>
+        <div style="width: 100px;height: 100%;float: left;background-color:darkgray;margin-left: -100px;">right</div>
+    </div>
+
+    <input id='xxxx' />
+</body>
+<script>
+    // let strrr = `FontSize_XS = 10;
+    // export const FontSize_S = 12;
+    // export const FontSize_M = 14;
+    // export const FontSize_L = 16;
+    // export const FontSize_XL = 18;
+    // export const FontSize_2XL = 20;
+    // export const FontSize_3XL = 22;
+    // export const FontSize_4XL = 24;
+    // export const FontSize_5XL = 26;
+    // export const FontSize_6XL = 28;
+    // export const FontSize_7XL = 30;
+    // export const FontSize_8XL = 32;
+    // export const FontSize_9XL = 34;
+    // export const FontSize_10XL = 36;
+    // export const FontSize_11XL = 38;
+    // export const FontSize_12XL = 40;
+    // export const FontSize_13XL = 42;
+    // export const FontSize_14XL = 44;
+    // export const FontSize_15XL = 46;
+    // export const FontSize_16XL = 48;`
+    // strrr = strrr.replace(/\s/g, '')
+    // strrr = strrr.replace(/(?<=\;)\w+(?=F)/gi, function () {
+    //     return ','
+    // })
+    // strrr = strrr.replace(/\;/g, '')
+    // strrr = strrr.replace(/\=\d+\,/g, ',')
+    // // console.log(strrr)
+    // document.querySelector('#in').oninput = throttle(() => { console.log(1) }, 1000)
+    // function debouce(fn, delay) {
+    //     let timer = null
+    //     return function () {
+    //         if (timer) {
+    //             clearTimeout(timer)
+    //         }
+    //         timer = setTimeout(fn, delay)
+    //     }
+    // }
+    // function throttle(fn, delay) {
+    //     let flag = true
+    //     return function () {
+    //         if (flag) {
+    //             flag = false
+    //             setTimeout(() => {
+    //                 fn()
+    //                 flag = true
+    //             }, delay)
+    //         }
+    //     }
+    // }
+
+
+
+    // function throttle_(fn, delay) {
+    //     let timer = null
+    //     return function () {
+    //         if (!timer) {
+    //             timer = setTimeout(() => {
+    //                 fn()
+    //                 timer = null
+    //             }, delay);
+    //         }
+    //     }
+    // }
+    // function debounce_(fn, delay) {
+    //     let timer = null
+    //     return function () {
+    //         if (timer) {
+    //             clearTimeout(timer)
+    //         }
+    //         timer = setTimeout(() => {
+    //             fn()
+    //         }, delay);
+    //     }
+    // }
+
+    // function deepClone(value) {
+    //     let data
+    //     if (value instanceof Array) {
+    //         data = []
+    //         for (let key in value) {
+    //             data[key] = deepClone(value[key])
+    //         }
+    //     } else if (value instanceof Function) {
+    //         data = value
+    //     } else if (value instanceof Object) {
+    //         data = {}
+    //         for (let key in value) {
+    //             data[key] = deepClone(value[key])
+    //         }
+    //     } else {
+    //         data = value
+    //     }
+    //     return data
+    // }
+    // let newArr = deepClone(arr_)
+    // let arr_ = [1, null, undefined, NaN, () => { }, 3, {}, { a: 1, b: 2, c: { d: 1, f: 2, e: [1, 2, 3, { g: 10 }] } }]
+    // let newArr = JSON.parse(JSON.stringify(arr_))
+    // arr_[0] = 10
+    // arr_[7].a = 10
+    // console.log(arr_, newArr)
+    // let newArr = JSON.parse(JSON.stringify(arr_))
+    // console.log(document.getElementById('xxxx'))
+    // document.getElementById('xxxx').oninput = debounce_(() => { console.log(1) }, 1000)
+    // document.getElementById('xxxx').addEventListener('input', debounce_(() => { console.log(1) }, 1000))
+    // window.addEventListener('mousemove', debounce_(() => { console.log(1) }, 1000))
+    //   onInput ()  {
+    //         debounce(() => { console.log(1) }, 1000)();
+    //     },
+    //     debounce (fn, delay) {
+    //         return function (...args) {
+    //             if (this.timer) clearTimeout(this.timer)
+    //             this.timer = setTimeout(() => {
+    //                 fn(...args)
+    //             }, delay)
+    //         }
+
+    //     }
+
+
+    // let timer = null
+    // const onInput = () => {
+    //     debounce(() => { console.log(1) }, 1000)();
+    // }
+    // const debounce = (fn, delay) => {
+    //     return function (...args) {
+    //         if (timer) clearTimeout(timer)
+    //         timer = setTimeout(() => {
+    //             fn(...args)
+    //         }, delay)
+    //     }
+
+    // }
+    // new Promise(r => {
+    //     r(
+    //         new Promise(r => { r(1) })
+    //     )
+    // })
+    //     .then(e => { console.log(1) })
+    //     .then(e => { console.log(2) })
+    // Promise.resolve(new Promise(r => { r(1) })).then(e => { console.log(1) }).then(e => { console.log(2) })
+    // 1 10 2 20
+    // new Promise(r => {
+    //     r(
+
+    //     )
+    // }).then(e => { console.log(10) }).then(e => { console.log(20) }).then(e => { console.log(30) }).then(e => { console.log(40) })
+    // script start => async2 end => Promise => script end => promise1 => promise2 => async1 end => setTimeout
+    // async function fn() {
+    //     await new Promise(resolve => { console.log('p1'); resolve(1) })
+    //         .then(e => { console.log('p2',e); return 2 })
+    //         .then(e => { console.log('p3',e) })
+    // }
+    // fn()
+    // new Promise(resolve => { resolve('_p1') })
+    // .then(e => { console.log('_p2',e) })
+
+    // [1, 2, 3].forEach( e => {
+    //      setTimeout(() => {
+    //         console.log(e)
+    //     }, e*1000);
+    // })
+    //     function Person(name) {
+
+    //   this.name = name; // Person {name: "why"}
+    //   return {}
+    // }
+
+    // var p = new Person("why");
+    // console.log(p);
+    //这里只能用var定义变量,let,const定义的变量，不是绑定在window下。
+    // var str = 'window';
+
+    // const obj = {
+    //     str: 'obj',
+    //     nativeFn: function () {
+    //         console.log(this.str, '当前词法作用域中的this');
+    //         return function () {
+    //             console.log('原生函数', this.str);
+    //         }
+    //     },
+    //     arrowFn: function () {
+    //         console.log(this.str, '当前词法作用域中的this');
+    //         return () => {
+    //             console.log('箭头函数', this.str);
+    //         }
+    //     }
+    // };
+    // const obj2 = {
+    //     str: 'obj2'
+    // }
+
+    // var nativeFn = obj.nativeFn();
+    // var arrowFn = obj.arrowFn();
+
+    // console.log('函数调用一 **********');
+    // nativeFn();
+    // arrowFn();
+
+    // console.log('函数调用二 **********');
+    // nativeFn.call(obj2);
+    // arrowFn.call(obj2);
+
+    // console.log('函数调用三 **********');
+    // setTimeout(function () {
+    //     nativeFn();
+    //     arrowFn();
+    // }, 50);
+
+    // //函数调用四
+    // var doc = document.documentElement;
+    // doc.str = 'document';
+    // doc.addEventListener('click', function () {
+    //     console.log('函数调用四 **********');
+    // }, false);
+    // doc.addEventListener('click', nativeFn, false);
+    // doc.addEventListener('click', arrowFn, false);
+
+    // function aaa (){
+    //     var b = 1
+    //     function aa (b=2){
+
+    //         console.log(b)
+    //         var b = 3
+    //     }
+    //     aa()
+    // }
+    // aaa()
+    // var x = 11;
+    // var obj = {
+    //     obj1: {
+    //         x: 22,
+    //         say: () => {
+    //             console.log(this.x);
+    //         }
+    //     }
+    // }
+    // obj.obj1.say(); 
+    // let a = {
+    //     b() {
+    //         let c = {
+    //             d :() => {
+    //                 console.log(this)
+    //             }
+    //         }
+    //         c.d()
+    //     }
+    // }
+    // // a.b.call(window)
+    // let ccc  = a.b()
+    // ccc()
+    // ------- ---------//
+    // 加强版冒泡排序
+    // function bubbleS(arr) {
+    //     let flag = false
+    //     for (let j = arr.length - 1; j > 0; j--) {
+    //         if (flag || j === arr.length - 1) {
+    //             for (let i = 0; i < j; i++) {
+    //                 if (arr[i] > arr[i + 1]) {
+    //                     [arr[i], arr[i + 1]] = [arr[i + 1], arr[i]]
+    //                     flag = true
+    //                 }
+    //             }
+    //         } else {
+    //             return arr
+    //         }
+
+    //     }
+    //     return arr
+    // }
+
+    // console.log(bubbleS([1, 2, 4, 2, 1, 6, 3, 5]))
+    // set去重
+    // console.log([1, 2, 3, 3, 2, 2, 2].reverse())
+    // 对象去重
+    // function noRepeat(arr) {
+    //     let obj = {}
+    //     for (let value of arr) {
+    //         if (!obj[value]) {
+    //             obj[value] = 1
+    //         } else {
+    //             obj[value]++
+    //         }
+    //     }
+    //     return Object.keys(obj).map(e=>{
+    //         return parseInt(e)
+    //     })
+    // }
+    // 使用indexOf去重
+    // function noRepeat1(arr) {
+    //     let newarr = []
+    //     arr.forEach(e=>{
+    //         if(newarr.indexOf(e)===-1){
+    //             newarr.push(e)
+    //         }
+    //     })
+    //     return newarr
+    // }
+    // jsonp处理跨域
+    // var script_ = document.createElement('script');
+    // function getData(data) {
+    //     console.log(data)
+    // }
+    // script_.src = 'http://localhost:8000?callback=getData'
+    // document.body.appendChild(script_)
+    // 三次握手
+
+
+    // let arr = [1, 2, 3, 4, 3, 4, 5, 6, 3, 1, 5, null, undefined, NaN, null, undefined, NaN]
+    // let newArr = [...new Set(arr)]
+    // console.log(newArr)
+
+    // function removeDuplication1(arr) {
+    //     let obj = {}
+    //     let newArr = []
+    //     for (let value of arr) {
+    //         if (!obj[value]) {
+    //             obj[value] = 1
+    //             newArr.push(value)
+    //         }
+    //     }
+    //     return newArr
+    // }
+    // function removeDuplication2(arr) {
+    //     let newArr = []
+    //     for (let value of arr) {
+    //         if (newArr.indexOf(value) === -1) {
+    //             newArr.push(value)
+    //         }
+    //     }
+    //     return newArr
+    // }
+    // let obj_temp = { a: 1, b: 2, c: [12, 34, 56], d: { e: 5 }, f: NaN, g: undefined, h: null }
+    // function deepClone03(obj) {
+    //     // 新建空拷贝对象，其原型通过bject.create设置为obj的原型对象
+    //     let copy = Object.create(Object.getPrototypeOf(obj))
+    //     // 获取obj对象上的所有属性
+    //     let propNames = Object.getOwnPropertyNames(obj)
+    //     propNames.forEach(e => {
+    //         // 返回obj每个属性的描述对象
+    //         let item = Object.getOwnPropertyDescriptor(obj, e)
+    //         // 将属性，属性的描述对象放到空拷贝对象中
+    //         Object.defineProperty(copy, e, item)
+    //     })
+    //     // 返回拷贝对象
+    //     return copy
+    // }
+    // console.log(obj_temp)
+    // let copy_obj = deepClone03(obj_temp)
+    // obj_temp.a = 11
+    // obj_temp.c[0] = 1212
+    // obj_temp.d.e = 55
+    // console.log(obj_temp, copy_obj)
+
+    // function shuffle_sort(arr) {
+    //     return arr.sort(() => (Math.random() - 0.5))
+    // }
+    // function shuffle(arr) {
+    //     for (let i = arr.length - 1; i > 0; i--) {
+    //         let changeI = Math.floor(Math.random() * i)
+    //         console.log(changeI);
+    //         [arr[i], arr[changeI]] = [arr[changeI], arr[i]]
+    //     }
+    //     return arr
+    // }
+    // let arr_01 = [1, 2, 3, 4, 5, 6]
+    // let arr_02 = [1, 2, 3, 4, 5, 6]
+    // console.log(shuffle_sort(arr_01), shuffle(arr_02))
+
+    // Function.prototype.my_call = function (thisArg, ...args) {
+    //     // thisArg 不存在this指向window
+    //     thisArg = thisArg || window
+    //     // 防止属性名覆盖原先对象中某个属性
+    //     let fn = Symbol('fn')
+    //     // 调用my_call是我们需要改变this指向的函数，将这个函数赋值给thisArg.fn，这样fn的this指向在下面【 thisArg.fn(...args)】指向指定的对象thisArg
+    //     thisArg.fn = this
+    //     let result = thisArg.fn(...args)
+    //     // 使用完毕删除fn，不影响指定函数数据
+    //     delete thisArg.fn
+    //     // 返回数据
+    //     return result
+
+    // }
+    // Function.prototype.my_apply = function (thisArg, args) {
+    //     // thisArg 不存在this指向window
+    //     thisArg = thisArg || window
+    //     // 防止属性名覆盖原先对象中某个属性
+    //     let fn = Symbol('fn')
+    //     // 调用my_call是我们需要改变this指向的函数，将这个函数赋值给thisArg.fn，这样fn的this指向在下面【 thisArg.fn(...args)】指向指定的对象thisArg
+    //     thisArg.fn = this
+    //     let result = thisArg.fn(...args)
+    //     // 使用完毕删除fn，不影响指定函数数据
+    //     delete thisArg.fn
+    //     // 返回数据
+    //     return result
+
+    // }
+    // function say(word = 'yeah') {
+    //     console.log(this)
+    //     console.log(word)
+    // }
+    // Function.prototype.my_bind = function (thisArg, ...args) {
+    //     // thisArg 不存在this指向window
+    //     thisArg = thisArg || window
+    //     // 防止属性名覆盖原先对象中某个属性
+    //     let fn = Symbol('fn');
+    //     // thisArg.fn 赋值为调用my_bind的函数
+    //     thisArg.fn = this
+    //     // 返回一个闭包，闭包保持对thisArg的引用
+    //     return function () {
+    //         thisArg.fn(...args)
+    //         delete thisArg.fn
+    //     }
+    // }
+    // function say(word = 'yeah') {
+    //     console.log(this)
+    //     console.log(word)
+    // }
+    // let test_obj = { name: 1 }
+    // console.log(test_obj, 'ring')
+    // let newfn = say.my_bind(test_obj, 'aha')
+    // newfn()
+    // console.log(test_obj, 'ring')
+
+
+    // 原型链继承
+    // function Human() {
+    //     this.hobby = ['eat']
+    // }
+    // Human.prototype.location = ['Earth']
+    // function Man(name) {
+    //     this.name = name
+    //     this.activity = ['run']
+    // }
+    // Man.prototype = new Human()
+    // Man.prototype.constructor = Man
+
+    // // 实现
+    // let man1 = new Man('💐')
+    // console.log(Object.getOwnPropertyDescriptor(man1.__proto__, 'hobby'));
+
+
+
+    // let man2 = new Man('coco')
+    // man1.hobby = 'sing'
+    // man1.activity = 'sleep'
+    // man1.location = 'China'
+    // console.log(man1);
+    // console.log(man2);
+    // // 实现
+    // let man1 = new Man('💐')
+    // let man2 = new Man('coco')
+    // man1.hobby.push('sing')
+    // man1.activity.push('sleep')
+    // man1.location.push('China')
+    // console.log(man1);
+    // console.log(man2);
+
+    // var obj = {
+    //     _arr: []
+    // };
+    // Object.defineProperty(obj, 'arr', {
+    //     get: function () {
+    //         console.log('get');
+    //         return this._arr
+    //     },
+    //     set: function (value) {
+    //         console.log('set');
+    //         this._arr = value
+    //     }
+    // })
+
+
+    // // 构造函数+原型链继承
+    // function Human(name) {
+    //     this.name = name
+    //     this.hobby = ['eat']
+    // }
+    // function Man(name) {
+    //     Human.call(this, name)
+    //     this.activity = ['run']
+    // }
+    // Man.prototype = new Human()
+    // Man.prototype.constructor = Man
+
+    // let man1 = new Man('kiki')
+    // let man2 = new Man('gigi')
+    // man1.name = 'kk'
+    // man1.activity.push('ring')
+    // man1.hobby.push('sleep')
+    // console.log(man1, man2)
+
+    // // 原型式继承
+    // let human = {
+    //     hobby: ['eat']
+    // }
+    // let man = Object.create(human, {
+    //     name: {
+    //         value:'xio'
+    //     }
+    // })
+    // console.log(man);
+
+    // function createObj(obj) {
+    //     var clone = Object(obj)
+    //     clone.hobby = ['sing', 'jump']
+    //     return clone
+    // }
+    // let human = {
+    //     activity: ['exit']
+    // }
+    // let man1 = createObj(human)
+    // console.log(man1);
+
+    // // 寄生组合式继承
+    // function Human(name) {
+    //     this.name = name
+    //     this.hobby = ['sing', 'jump']
+    // }
+    // function Man(name) {
+    //     Human.call(this, name)
+    //     this.activity = ['rap']
+    // }
+
+    // // 我觉得这波操作只是保持prototype_clone必须得是个对象，至少也是个空对象，如果Human.prototype === null 这种 ，不然prototype_clone.constructor = Man 就操作不了了
+    // let prototype_clone = Object(Human.prototype)
+
+    // // 下面就是正常的修改prototype构造器 然后给Man一个改造之后的父的原型对象
+    // prototype_clone.constructor = Man
+    // Man.prototype = prototype_clone
+
+    // let man1 = new Man('kiki')
+    // let man2 = new Man('gigi')
+    // man1.name = 'kk'
+    // man1.activity.push('ring')
+    // man1.hobby.push('sleep')
+    // console.log(man1, man2)
+
+
+    // class Human {
+    //     constructor(name) {
+    //         this.name_ = name || 'human'
+    //         this.activity = 'sleep'
+    //     }
+    //     run(time) {
+    //         console.log(this)
+    //         console.log(`at ${time},${this.name_} is ${this.activity}ing`);
+    //     }
+    //     static fight() {
+    //         console.log(this);
+    //         console.log(`${this.name} kill others`);
+    //     }
+    // }
+    // class Man extends Human {
+    //     constructor(name, food) {
+    //         super(name)
+    //         this.food = food
+    //     }
+    // }
+
+    // let man1 = new Man('newman', 'apple')
+
+    // function sleep1(interval) {
+    //     return new Promise(resolve => {
+    //         setTimeout(resolve, interval);
+    //     })
+    // }
+    // async function run() {
+    //     console.log('prepare')
+    //     await sleep1(2000)
+    //     console.log('run')
+    // }
+    // run()
+
+    // function sleep(time) {
+    //     let date = new Date()
+    //     while (new Date() - date < time) {
+
+    //     }
+    //     console.log(date, new Date(), new Date() - date);
+    // }
+    // console.log(1)
+    // sleep(2000)
+    // console.log(2)
+
+    // let PENDING = 'pending'
+    // let RESOLVED = 'resolved'
+    // let REJECTED = 'rejected'
+
+    // function Promise_(excutor) {
+    //     // Promise_状态
+    //     this.status = PENDING
+    //     // Promise_成功的值
+    //     this.value = undefined
+    //     // Promise_失败的原因
+    //     this.reason = undefined
+    //     // 成功回调队列
+    //     this.resolveQue = []
+    //     // 失败回调队列
+    //     this.rejectQue = []
+
+    //     const resolve = (value) => {
+    //         if (this.status === PENDING) {
+    //             // Promise_状态 成功
+    //             this.status = RESOLVED
+    //             // 保存成功的值
+    //             this.value = value
+    //             // 执行成功回调队列
+    //             this.resolveQue.forEach(fn => {
+    //                 fn(value)
+    //             })
+    //         }
+    //     }
+    //     const reject = (reason) => {
+    //         if (this.status === PENDING) {
+    //             // Promise_状态 失败
+    //             this.status = REJECTED
+    //             // 保存失败的原因
+    //             this.reason = reason
+    //             // 执行失败回调队列
+    //             this.rejectQue.forEach(fn => {
+    //                 fn(reason)
+    //             })
+    //         }
+    //     }
+    //     // 如果excutor出错 Promise_失败
+    //     try {
+    //         excutor(resolve, reject)
+    //     } catch (error) {
+    //         reject(error)
+    //     }
+    // }
+    // function resolvePromise_(x, resolve, reject, promise2) {
+    //     // x 不能 === promise2
+    //     if (x === promise2) {
+    //         return reject(new Error('circle'))
+    //     }
+    //     if (x && (typeof x === ' function' || typeof x === 'object')) {
+    //         try {
+    //             // 判断x的值是否实现了thenable 
+    //             if (typeof x.then === 'function') {
+    //                 x.then(y => {
+    //                     resolvePromise_(y, resolve, reject, promise2)
+    //                 }, e => {
+    //                     reject(e)
+    //                 })
+    //             } else {
+    //                 resolve(x)
+    //             }
+    //         } catch (error) {
+    //             reject(error)
+    //         }
+
+    //     } else {
+    //         resolve(x)
+    //     }
+    // }
+    // Promise_.prototype.then = function (onResolve, onReject) {
+
+
+
+
+    //     return promise2 = new Promise_((resolve, reject) => {
+    //         // onFulfilled如果不是函数，就忽略onFulfilled，直接返回value
+    //         onResolve = typeof onResolve === 'function' ? onResolve : () => this.value;
+    //         // onRejected如果不是函数，就忽略onRejected，直接扔出错误
+    //         onReject = typeof onReject === 'function' ? onReject : err => { throw err };
+
+    //         // 如果状态是RESOLVED, 传入成功值,执行onResolve
+    //         if (this.status === RESOLVED) {
+    //             try {
+    //                 let x = onResolve(this.value)
+    //                 // resolve(x)
+    //                 resolvePromise_(x, resolve, reject, promise2)
+    //             } catch (error) {
+    //                 reject(error)
+    //             }
+
+
+    //         }
+    //         // 如果状态是REJECTED,传入失败原因, 执行onReject
+    //         if (this.status === REJECTED) {
+    //             try {
+    //                 onReject(this.reason)
+    //                 // reject(x)
+    //                 resolvePromise_(x, resolve, reject, promise2)
+    //             } catch (error) {
+    //                 reject(error)
+    //             }
+
+    //         }
+    //         // 如果状态是PENDING, 成功失败的函数放入队列等待执行
+    //         if (this.status === PENDING) {
+    //             // 保存成功的回调
+    //             this.resolveQue.push((value) => {
+    //                 try {
+    //                     let x = onResolve(value)
+    //                     resolvePromise_(x, resolve, reject, promise2)
+    //                 } catch (error) {
+    //                     reject(error)
+    //                 }
+
+    //             })
+    //             // 保存失败的回调
+    //             this.rejectQue.push((reason) => {
+    //                 try {
+    //                     let x = onReject(reason)
+    //                     resolvePromise_(x, resolve, reject, promise2)
+    //                 } catch (error) {
+    //                     reject(error)
+    //                 }
+
+    //             })
+    //         }
+    //     })
+    // }
+
+    // new Promise_((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve(1)
+    //     }, 1000);
+    // }).then(e => {
+    //     console.log(e, 1);
+    //     return new Promise_(resolve => {
+    //         resolve(
+    //             new Promise_(resolve => {
+    //                 reject(2)
+    //             })
+    //         )
+    //     })
+    // }, e => {
+    //     console.log(e)
+    // }).then(e => {
+    //     console.log(e, 2);
+    //     return 3
+    // }, e => {
+    //     console.log(e)
+    // }).then(e => {
+    //     console.log(e, 3);
+    // }, e => {
+    //     console.log(e)
+    // })
+
+    // nodeGet(1, function (err, data) {
+    //     if (err) {
+    //         console.log(err)
+    //     } else {
+    //         console.log(data)
+    //     }
+    // })
+
+    Promise.myAll = function (Promises) {
+        let arr = []
+        let len = Promises.length
+        return new Promise(resolve => {
+            Promises.forEach((e, i) => {
+                e.then(ee => { arr.push(ee); console.log('i len', i, len);; if (i === len - 1) { resolve(arr) } })
+            })
+        })
+    }
+    Promise.myRace = function (Promises) {
+        return new Promise(resolve => {
+            Promises.forEach(e => {
+                e.then(ee => resolve(ee))
+            })
+
+        })
+    }
+    // Promise.myRace([new Promise(resolve => { setTimeout(() => { resolve(1) }, 1000) }), new Promise(resolve => { setTimeout(() => { resolve(2) }, 2000) })]).then(e => { console.log(e, 'res'); })
+    // Promise.myAll([new Promise(resolve => { setTimeout(() => { resolve(1) }, 1000) }), new Promise(resolve => { setTimeout(() => { resolve(2) }, 2000) })]).then(e => { console.log(e, 'res'); })
+
+    function randomPromise() {
+        let num = Math.random()
+        return num > 17 ? new Promise(resolve => {
+            resolve(1)
+        }) : new Promise((resolve, reject) => { reject(2) })
+    }
+
+    Promise.retry = function (randomPromise) {
+        let i = 5
+        return new Promise((resolve, reject) => {
+            function fn() {
+                i--
+                randomPromise().then(resolve, e => {
+                    console.log('e', e);
+                    if (i > 0) {
+                        fn()
+                    } else {
+                        reject(e)
+                    }
+                })
+            }
+            fn()
+        })
+    }
+    // Promise.retry(randomPromise).then(e => {
+    //     console.log('ee', e);
+    // }, e => {
+    //     console.log('err', e);
+    // })
+
+    // function TaskControl(tasks, count) {
+    //     this.taskQue = tasks || []
+    //     this.count = count || 10
+    //     setTimeout(() => { this.run }, 0)
+    // }
+    // TaskControl.prototype.addTask = function (task) {
+    //     this.taskQue.push(task)
+    // }
+    // TaskControl.prototype.run = function () {
+    //     // 
+    //     if (this.taskQue.length === 0) {
+    //         return
+    //     }
+    //     let min = Math.min(this.taskQue.length, this.count)
+    //     for (let i = 0; i < min; i++) {
+    //         this.max--
+    //         let task = this.taskQue.shift()
+    //         task().then(null, null).finally(e => {
+    //             this.max++
+    //             this.run()
+    //         })
+
+    //     }
+    // }
+    // Promise.myAll = function (arr) {
+    //     // 结果保存数组
+    //     let resArr = []
+    //     // 计数器 判断当前arr是否then完
+    //     let promiseCount = 0
+    //     // 返回一个新的Promise，如果arr某提个失败则该Promise结果为失败，如果全部成功则为成功，
+    //     return new Promise((resolve, reject) => {
+    //         arr.forEach((e, i) => {
+    //             e.then(value => {
+    //                 // 此处得用下标赋值 保证返回出去的数据顺序与传入Promise数组一致
+    //                 resArr[i] = value
+    //                 promiseCount++
+    //                 if (arr.length === promiseCount) {
+    //                     return resolve(resArr)
+    //                 }
+    //             }, err => { return reject(err) })
+    //         })
+    //     })
+    // }
+    // let p1 = new Promise(resolve => {
+    //     setTimeout(() => {
+    //         resolve(1000)
+    //     }, 1000)
+    // })
+    // let p2 = new Promise(resolve => {
+    //     setTimeout(() => {
+    //         resolve(2000)
+    //     }, 2000)
+    // })
+    // let p3 = Promise.resolve('success')
+    // let p4 = new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         reject(3000)
+    //     }, 3000)
+    // })
+
+    // Promise.myAll([p1, p2, p3, p4]).then(e => { console.log(e); }).catch(e => { console.log(e); }).then(e => { console.log(e); })
+
+    // Promise.retry = function (fn, count) {
+    //     // 接受一个制造Promise的函数 与重试次数 返回Promise
+    //     return new Promise((resolve, reject) => {
+    //         // 使用递归方式执行fnTemp ： 在count次数内 判断如果fn生成的Promise最终状态不是成功 则继续回调 fn继续生成新的Promise 直到成功 或者次数用完直接reject(err)
+    //         function fnTemp() {
+    //             fn().then(resolve, err => {
+    //                 console.log(count);
+    //                 count--
+    //                 if (count > 0) {
+    //                     return fnTemp()
+    //                 }
+    //                 reject(err)
+    //             })
+    //         }
+    //         fnTemp()
+    //     })
+    // }
+    // // 随意Promise 生成函数器械
+    // function randomP() {
+    //     return new Promise((resolve, reject) => {
+    //         return Math.random() > 0.5 ? resolve('success') : reject('err')
+    //     })
+    // }
+    // // 使用
+    // Promise.retry(randomP, 5).then(e => { console.log(e) }).catch(err => { console.log(err); })
+    // --------------------- 回调函数方式执行
+    // // 回调函数
+    // function killHater(param1, param2, cb) {
+    //     let res = param1 + param2
+    //     cb(res)
+    // }
+    // // 正常回调执行
+    // killHater(1, 3, (e) => { console.log(e, '回调函数执行') })
+    // // --------------------- Promise方式执行
+    // // 封装 回调=》Promise 函数
+    // function changeP(fn) {
+    //     return function () {
+    //         // 拿到所有除了回调之外的参数
+    //         let args = [...arguments]
+    //         // 返回Promise
+    //         return new Promise((resolve, reject) => {
+    //             // 添加自定义回调 将fn传入的值保存到当前Promise value中，从而可以在then中获取
+    //             function cb(e) {
+    //                 resolve(e)
+    //             }
+    //             // 将回调放到参数列表中
+    //             args.push(cb)
+    //             // fn执行，前面的参数都是普通参数，最后一个是我们自定义回调，该回调作用：当fn执行到该回调意味着我们可以把fn传入的值(如果有的话，没有就是undefined)resolve，我们可以在then中接收，然后处理我们原先回调中的事
+    //             fn.apply(null, args)
+    //         })
+    //     }
+    // }
+    // let fnP = changeP(killHater)
+    // fnP(2, 3).then(e => { console.log(e, 'Promise执行'); })
+
+    // // ---控制最大并发数MaxRun实现---
+    // function MaxRun() {
+    //     // 任务队列
+    //     this.runList = []
+    //     // 最大并发数
+    //     this.maxCount = 2
+    // }
+    // // 添加任务方法
+    // MaxRun.prototype.add = function (args) {
+    //     Array.prototype.push.apply(this.runList, args)
+    // }
+    // // 跑起来
+    // MaxRun.prototype.run = function () {
+    //     // 如果任务队列没有任务 return
+    //     if (this.runList.length === 0) return
+    //     // 任务队列
+    //     let runList = this.runList
+    //     // // 最大并发数
+    //     // let maxCount = this.maxCount
+    //     // 取任务队列数与最大并发数最小值 作为下面任务任务运行数量
+    //     let min = Math.min(runList.length, this.maxCount)
+    //     // for循环运行起来
+    //     for (let i = 0; i < min; i++) {
+    //         // 运行一次maxCount--，因为Promise是微任务，当min次之后，此时每一个Promise都还没开始then
+
+    //         // maxCount为最后剩余的能添加任务的坑位，因为maxCount 与 任务队列长度取最小值 
+    //         // 如果maxCount比任务队列长度小 那么maxCount在这一波for循环结束就会为0，此时意味着没有任务可以继续执行
+    //         // 如果maxCount比任务队列长度大 那么maxCount在这一波for循环结束就会是maxCount-队列长度，剩下多少就意味着还有多少坑位可以来任务执行
+
+    //         // 
+    //         this.maxCount--
+    //         // 任务队列取一个出来then，原任务队列削减一个任务
+    //         let task = runList.shift()
+    //         // 成功失败该干啥干啥 最后执行完一个要将maxCount++ 将用完的坑位让出来 可以有别的任务进来
+    //         task.then(e => e, err => err).finally(e => {
+    //             this.maxCount++
+    //             console.log('剩余坑位', this.maxCount);
+    //             // 执行run 意味着只要有坑位 队列有数据 就能一直执行队列 如果不执行run （如果任务队列长度是10 maxcount是2，那没执行2次就结束了 后面的任务不会继续执行）
+    //             this.run()
+    //         })
+    //     }
+
+    // }
+    // // ---下面为测试代码---
+    // // Promise生成器
+    // function createP(n) {
+    //     let res = []
+    //     for (let i = 0; i < n; i++) {
+    //         res.push(new Promise(resolve => { setTimeout(() => { resolve(1000 * i / 2) }, 1000 * i / 2) }))
+    //     }
+    //     return res
+    // }
+    // // 创建maxRun对象
+    // let maxRun = new MaxRun()
+    // // 添加10个Promise任务到任务队列
+    // maxRun.add(createP(10))
+    // // 执行任务队列
+    // maxRun.run()
+
+
+
+    // class EventEmitter {
+    //     constructor() {
+    //         if (!this.handles) {
+    //             this.handles = Object.create(null);
+    //         }
+    //     }
+
+    //     on(evt, cb) {
+    //         if (!this.handles[evt]) {
+    //             this.handles[evt] = [];
+    //         }
+    //         this.handles[evt].push(cb);
+    //     }
+
+    //     emit(evt, ...arg) {
+    //         if (!!this.handles[evt]) {
+    //             this.handles[evt].forEach((item, i) => {
+    //                 if (typeof item === 'function') {
+    //                     Reflect.apply(item, this, arg);
+    //                 } else {
+    //                     return console.error(`${item} is not a function in [${i}]`)
+    //                 }
+    //             })
+    //         }
+    //     }
+    // }
+    // let e = new EventEmitter()
+    // e.on('fn', (param) => {
+    //     console.log('1', param);
+    // })
+    // e.on('fn', (param) => {
+    //     console.log('2', param);
+    // })
+    // setTimeout(() => { e.emit('fn', 1) }, 1000)
+
+    // class EventEmitter_mine {
+    //     constructor() {
+    //         this.handles = {}
+    //     }
+
+    //     add(key, handle, once = false) {
+    //         if (typeof handle === 'function') {
+    //             handle.once = once
+    //             this.handles[key] = this.handles[key] || []
+    //             this.handles[key].push(handle)
+    //         } else {
+    //             throw new Error('handle must be a function')
+    //         }
+    //     }
+    //     on(key, handle) {
+    //         this.add(key, handle)
+    //     }
+    //     once(key, handle) {
+    //         this.add(key, handle, true)
+    //     }
+    //     emit(key, ...args) {
+    //         if (this.handles[key].length) {
+    //             this.handles[key].forEach((fn, i, arr) => {
+    //                 if (typeof fn === 'function') {
+    //                     fn.call(this, ...args)
+    //                     if (fn.once) {
+    //                         arr[i] = undefined
+    //                     }
+    //                 }
+    //             })
+    //         }
+    //     }
+    //     off(key, handle) {
+    //         if (typeof handle === 'function') {
+    //             if (this.handles[key]) {
+    //                 const index = this.handles[key].findIndex(e => e === handle)
+    //                 index >= 0 && this.handles[key].splice(index, 1)
+    //             }
+    //         } else {
+    //             throw new Error('handle must be a function')
+    //         }
+    //     }
+
+    // }
+    // function aa(e) { console.log(e, 'aa'); }
+    // function bb(e) { console.log(e, 'bb'); }
+    // function cc(e) { console.log(e, 'cc'); }
+    // let ee = new EventEmitter_mine()
+    // ee.on('cl', aa)
+    // ee.once('cl', bb)
+    // ee.on('cl', cc)
+    // // ee.once('cl', cc)
+    // // ee.on('cl', cc)
+
+    // ee.emit('cl', 'nice day')
+
+    // function my_instanceOf(leftValue, rightValue) {
+    //     if (leftValue === null || leftValue === undefined || !leftValue.__proto__) return false
+    //     let leftPro = leftValue.__proto__
+    //     let rightPro = rightValue.prototype
+
+    //     while (true) {
+    //         if (leftPro === null) {
+    //             return false
+    //         }
+    //         if (leftPro === rightPro) {
+    //             return true
+    //         }
+    //         leftPro = leftPro.__proto__
+    //     }
+    // }
+    // let arr = [1, '', true, [], {}, () => { }, null, undefined]
+
+    // console.log('---------Number---------');
+    // arr.forEach(e => {
+    //     console.log(my_instanceOf(e, Number));
+    // })
+    // console.log('---------String---------');
+    // arr.forEach(e => {
+    //     console.log(my_instanceOf(e, String));
+    // })
+    // console.log('---------Boolean---------');
+    // arr.forEach(e => {
+    //     console.log(my_instanceOf(e, Boolean));
+    // })
+    // console.log('---------Array---------');
+    // arr.forEach(e => {
+    //     console.log(my_instanceOf(e, Array));
+    // })
+    // console.log('---------Object---------');
+    // arr.forEach(e => {
+    //     console.log(my_instanceOf(e, Object));
+    // })
+    // console.log('---------Function---------');
+    // arr.forEach(e => {
+    //     console.log(my_instanceOf(e, Function));
+    // })
+
+    // function Person(name, age) {
+    //     this.name = name
+    //     this.age = age
+
+    //     this.run = () => {
+    //         console.log('run');
+    //     }
+    // }
+
+    // function myNew(fn, ...args) {
+    //     let obj = {}
+    //     obj.__proto__ = fn.prototype
+    //     fn.apply(obj, args)
+    //     return obj
+    // }
+    // let person = myNew(Person, 'lily', 1)
+    // console.log(person);
+    // let arr = [1, 2, ['3', 4, [5, 6, [7, 8, [9]]]]]
+    // // 递归
+    // function myFlat(arr) {
+    //     let res = []
+    //     arr.forEach(e => {
+    //         if (e instanceof Array) {
+    //             res = res.concat(myFlat(e))
+    //         } else {
+    //             res.push(e)
+    //         }
+    //     })
+    //     return res
+    // }
+    // console.log(myFlat(arr),'递归');
+    // // reduce递归
+    // function myFlatten(arr) {
+    //     return arr.reduce((prev, next) => {
+    //         return prev.concat(Array.isArray(next) ? myFlatten(next) : next)
+    //     }, [])
+    // }
+    // console.log(myFlatten(arr));
+    // // 使用正则
+    // let str = JSON.stringify(arr)
+    // str = str.replace(/(\[|\])/g, '')
+    // str = str.split(',')
+    // str = '[' + str + ']';
+    // str = JSON.parse(str)
+    // console.log(str);
+
+    // function my_filter(fn, arr) {
+    //     if (typeof fn === 'function') {
+    //         let res = []
+    //         for (let i = 0; i < arr.length; i++) {
+    //             let resTemp = fn.call(arr, arr[i], i, arr)
+    //             if (resTemp) res.push(arr[i])
+    //         }
+    //         return res
+    //     } else {
+    //         throw new Error(`${fn} must be a function`)
+    //     }
+
+    // }
+    // let data = my_filter(function (e, i, arr) {
+    //     console.log(this);
+    //     console.log(e, i, arr);
+    //     return e > 3
+    // }, [1, 2, 3, 4, 5, 5, 6])
+    // console.log(data);
+
+    // // LazyMan 
+    // function LazyMan(name) {
+    //     class LazyMan_ {
+    //         constructor(name) {
+    //             // 保存name
+    //             this.name = name
+    //             // 任务执行队列 首先放入 自我介绍函数
+    //             this.tasks = [
+    //                 () => {
+    //                     console.log(`Hi,this is ${this.name}`);
+    //                     this.next()
+    //                 }
+    //             ]
+    //             // 定时器 当所有同步任务完成后（所有任务都加载到tasks任务队列中） 才开始运行定时器任务
+    //             setTimeout(() => {
+    //                 this.next()
+    //             }, 0);
+    //         }
+    //         // 取出第一个任务开始执行
+    //         next() {
+    //             let task = this.tasks.shift()
+    //             task && task()
+    //         }
+    //         // 定义eat函数
+    //         eat(meal) {
+    //             let fn = () => {
+    //                 console.log(`Eat,${meal}`);
+    //                 // 执行完eat函数执行下一个函数
+    //                 this.next()
+    //             }
+    //             // 装载eat函数
+    //             this.tasks.push(fn)
+    //             // 返回 LazyMan_实例化对象
+    //             return this
+    //         }
+    //         sleep(time) {
+    //             let fn = () => {
+    //                 setTimeout(() => {
+    //                     console.log(`${this.name} wake up ${time} ms `);
+    //                     this.next()
+    //                 }, time)
+    //             }
+    //             this.tasks.push(fn)
+    //             return this
+    //         }
+    //         sleepFirst(time) {
+    //             let fn = () => {
+    //                 setTimeout(() => {
+    //                     console.log(`${this.name} wake first ${time} ms `);
+    //                     this.next()
+    //                 }, time)
+    //             }
+    //             // 插队放到最前面执行
+    //             this.tasks.unshift(fn)
+    //             return this
+    //         }
+    //     }
+    //     return new LazyMan_(name)
+    // }
+
+    // let lazyMan = LazyMan('Hank')
+    // lazyMan.eat('1').sleep(1000).eat('lunch').sleep(1000).eat('dinner').sleepFirst(1000)
+
+    function myCurry(fn, ...args) {
+        if (typeof fn !== 'function') {
+            throw new Error('fn must be a function')
+        }
+        let self = this
+        let len = fn.length
+        if (args.length === len) {
+            return fn.apply(self, args)
+        } else {
+            return function fn_2() {
+                let args_2 = [...arguments]
+                // console.log(args_2, len === args.length + args_2.length, [...args, ...args_2]);
+                if (len === args.length + args_2.length) {
+                    return fn.apply(self, [...args, ...args_2])
+                } else {
+                    args = args.concat(args_2)
+                    return fn_2
+                }
+            }
+        }
+    }
+    function add(a, b, c, d, e, f) {
+        console.log();
+        return a + b + c + d + e + f
+    }
+    console.log(myCurry(add, 1, 2)(3)(4)(5, 6));
+</script>
+
+</html>

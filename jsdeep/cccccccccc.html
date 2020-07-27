@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>c</title>
+</head>
+
+<body>
+    <!-- <div onclick="gf()" style="background-color: blue;width: 100%;">1
+        <div onclick="f()" style="background-color: red;width: 50%;">2
+            <a href='javascript:console.log(1)' onclick="return s()" style="background-color: yellow;width: 50%;">
+                3
+            </a href='www.baidu.com'>
+        </div>
+    </div> -->
+    <a href='javascript:console.log(1)' style="background-color: yellow;width: 50%;">
+        3
+    </a href='www.baidu.com'>
+</body>
+<script>
+
+
+    async function gene() {
+        await Promise.resolve(1)
+        console.log('gen1')
+        await console.log('&&')
+        console.log('gen2')
+        await 3
+        console.log('gen3')
+
+    }
+    setTimeout(() => { console.log('s1') }, 0);
+    gene();
+    Promise.resolve(1)
+        .then(e => { console.log('p1'); return Promise.resolve(2) })
+        .then(e => { console.log('p2') })
+
+    // async function car() {
+        // console.log(1)
+        // let d =  await new Promise((resolve, reject) => {
+        //     console.log(1.1)
+        //     resolve(1)
+        // }).then(e=>{
+        //     console.log(e+120)
+        // })
+
+        // console.log(d)
+        // console.log(2)
+        // let e =  await new Promise((resolve, reject) => {
+        //     console.log(2.1)
+        //     resolve(2.2)
+        // })
+
+    // }
+    // car()
+    // console.log(0)
+    // async function async1() {
+    //         await async2()
+    //         console.log('async1 end')
+    //     }
+    //     async function async2() {
+    //         console.log('async2 end')
+    //     }
+    //     console.log('script start')
+
+    //     async1()
+
+    //     setTimeout(function () {
+    //         console.log('setTimeout')
+    //     }, 0)
+
+    //     new Promise(resolve => {
+    //         console.log('Promise')
+    //         resolve()
+    //     })
+    //         .then(function () {
+    //             console.log('promise1')
+    //         })
+    //         .then(function () {
+    //             console.log('promise2')
+    //         })
+    //     console.log('script end');
+    /*
+    'script start'
+    'async2 end'
+    Promise
+    script end
+    async1 end'
+    'promise1
+    'promise2
+    setTimeout
+    */
+</script>
+
+</html>

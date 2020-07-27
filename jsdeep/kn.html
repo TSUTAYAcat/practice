@@ -1,0 +1,33 @@
+<!--
+ * @Author: your name
+ * @Date: 2020-05-27 17:23:24
+ * @LastEditTime: 2020-05-27 17:53:06
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: /study/jsdeep/kn.html
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    　　
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+
+</head>
+
+<body>
+    <div id='kn' style="height: 100px;background-color: blanchedalmond;">456</div>
+    <script>
+        console.log(document.getElementById('kn'));
+        setTimeout(function () {
+            $('#kn').html(`<span>123</span>`)
+        }, 2000)
+    </script>
+</body>
+
+</html>

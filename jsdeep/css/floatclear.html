@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        /* .contain::after{
+            content: '';
+            display: block;
+            clear: both;
+        } */
+        .contain {
+            width: 50%;
+            background-color: paleturquoise;
+            margin-bottom: 120px;
+        }
+
+        .float-left {
+            float: left;
+        }
+
+        .float-right {
+            float: right;
+        }
+
+        .float {
+            width: 60px;
+            height: 60px;
+            background-color: orange;
+            margin: 0 10px;
+        }
+
+        .clear {
+            width: 100px;
+            background-color: orchid;
+        }
+
+        .clear-left {
+            clear: left;
+        }
+
+        .clear-right {
+            clear: right;
+        }
+
+        .clear-both {
+            clear: both;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contain">
+        <div class="float float-left">浮动1-1</div>
+        <div class='clear clear-left'>我来清除浮动1</div>
+    </div>
+
+    <div class="contain">
+        <div class="float float-right">浮动2-1</div>
+        <div class='clear clear-left'>我来清除浮动2</div>
+    </div>
+
+    <div class="contain">
+        <div class="float float-right">浮动3-1</div>
+        <div class='clear clear-right'>我来清除浮动3</div>
+    </div>
+
+    <div class="contain">
+        <div class="float float-right">浮动4-1</div>
+        <div class='clear clear-both'>我来清除浮动4</div>
+    </div>
+
+    <div class="contain">
+        <div class="float float-right">浮动5-1</div>
+        <div class='clear clear-both'>我来清除浮动5</div>
+        <div class="float float-right">浮动5-2</div>
+    </div>
+
+    <div class="contain">
+        <div class="float float-right" style="height: 80px;">浮动6-1</div>
+        <div class="float float-right" style="height: 100px;">浮动6-2</div>
+        <div class='clear clear-both'>我来清除浮动6</div>
+    </div>
+
+    <div class="contain">
+        <div class="float" style="float:left">浮动</div>
+        <div class="float" style="float:left">浮动</div>
+        <span style="clear:both"></span>
+    </div>
+</body>
+
+</html>

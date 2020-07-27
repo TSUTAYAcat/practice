@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    //要求： 判断一个字符串第一个字符不为0后面全是是数字 就是类似于12340029010，但是不能是01223323
+    // let reg1 = /^[1-9][0-9]*/
+    // let reg2 = /[1-9]+/g
+    // let str = '0123ss12/dds123'
+    // console.log(reg2.lastIndex)
+    // let dd = reg2.exec(str)
+    // console.log(dd)
+    // while (dd) {
+    //     console.log(reg2.lastIndex)
+    //     console.log(dd = reg2.exec(str))
+    // }
+    // console.log(reg2.lastIndex)
+    //     console.log(dd = reg2.exec(str))
+    //     console.log(reg2.lastIndex)
+    //     console.log(dd = reg2.exec(str))
+    // console.log(reg2.lastIndex)
+    // console.log(reg2.exec(str))
+    // // console.log(reg2.exec(str))
+    // console.log(reg2.lastIndex)
+    // console.log(reg2.exec(str))
+    // console.log(reg2.lastIndex)
+    // console.log(reg2.exec(str))
+    // console.log(reg2.lastIndex)
+    // console.log(reg2.exec(str))
+    // console.log(reg2.lastIndex)
+    // console.log(reg2.exec(str))
+    // console.log(reg2.lastIndex)
+    // console.log(reg2.exec(str))
+    // console.log(reg2.exec(str),console.log(reg2.lastIndex),reg2.test(str),console.log(reg2.lastIndex))
+    // console.log(reg1.test(str)) // false
+    // console.log(reg2.test(str)); // true
+    // // var c = 1;
+    // // function dd() {
+    //     // console.log(this)
+    //     function a() {
+    //         console.log(this.c)
+    //     }
+    //     var c = 2
+    // a()
+    // }
+
+    // obj.func = dd
+    // dd()
+    // var reg = /\.1/g;
+    // var balance = '100.10001';
+    // console.log(reg.test(balance))
+    // let rege = /a(bc)/
+    // console.log(rege.test("3abc"))
+    // let a = rege.exec("3abc4,5abc6aabc90990999abc")
+    // while (a) {
+    //     console.log(a = rege.exec("3abc4,5abc6aabc90990999abc"))
+    // }
+    let str = 'get-element-by-id'
+    const reg0 = /-([a-z])/g
+    console.log(str.replace(reg0, (...args) => {
+        return args[1].toUpperCase()
+    }))
+    console.log(/^[01]+$/.test('0101010101011'))
+    console.log(/^[^ab]\d+/.test('123'))
+    console.log('12344858499303'.replace(/(\d\d\d)/g, (...args) => {
+       return args[1]+'-'
+    }))
+</script>
+
+</html>

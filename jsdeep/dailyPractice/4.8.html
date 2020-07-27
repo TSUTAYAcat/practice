@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>regexp</title>
+</head>
+
+<body>
+    <div id='hack'>hack</div>
+    <input id='input' />
+    <div class="link">
+        <a href="www.baidu.com">百度</a>
+        <a href="www.sina.com">sina</a>
+        <a href="www.youtube.com">youtube</a>
+        <span>关于马思唯是个花花公子还有黑马王子,马思唯</span>
+    </div>
+    <div id = 'assert'>
+        <a href="www.baidu.com">百度</a>
+        <a href="www.sina.com">sina</a>
+    </div>
+    <div class = 'phonenum'>
+        周子健：13029999999,
+        令北：12345678911
+    </div>
+    <input id='input1' />
+</body>
+<script>
+    const el = document.getElementById('hack')
+    el.innerHTML = el.innerHTML.replace(/\w/g, str => {
+        return `<span style="color:red">${str}</span>`
+    })
+    let tel = '010-9999999';
+    console.log(/(010|020)\-\d{7,8}/.test(tel))
+    console.log(tel.match(/(010)/))
+    let inpu = document.querySelector("[id='input']")
+    inpu.addEventListener('keyup', function () {
+        console.log(this.value.match(/^\d{3,6}$/))
+    })
+    let hd = `张三:13089079780,李四:13026086635.`
+    console.log(hd.match(/[^\d:,.]+/g))
+    // const values = prompt('请输入')
+    // console.log(values.match(/^[a-z]\w{4,9}$/))
+    let span_ = `<span>
+                sadasdas
+                asdasd
+                </span>
+                `
+    console.log(span_.match(/<span>[\d\ D]+<\/span>/))
+    let NousAotre = "UNousAotreu";
+    console.log(NousAotre.replace(/u/gi, '@'))
+
+    let bookshop = `
+    #1 js:200元 # 
+    #2 php:300元 # 
+    #2 php:300.00元 # 后盾人
+
+    #3 java:200元 # 
+    `
+    let bArr = bookshop.match(/^\s*#\d+\s+.+\s+#\s+$/gm)
+    let deal = bArr.map((e) => {
+
+        e = e.replace(/\s*#\d+\s*/, '').replace(/\s*#/, '').trim()
+        let [name, price] = e.split(':')
+        return { name, price }
+    })
+    console.log(deal)
+    console.log(bookshop.match(/\p{sc=Han}/gu))
+
+    let date48 = '2020/4/8'
+    console.log(date48.match(/^\d{4}([\/-])\d{1,2}\1\d{1,2}$/))
+    inpu.addEventListener('keyup', function () {
+        console.log(this.value.match(/^[\w]+@([\w]+.)+(com|cn|org)$/))
+    })
+    console.log(document.querySelector('div.link'))
+    const linkText = document.querySelector('div.link').innerHTML
+    console.log(linkText)
+    const reg = /<a.*?href=(['"])(?<link>.*?)\1>(?<title>.*?)<\/a>/gi
+    let linkArr = []
+    
+    for(let value of linkText.matchAll(reg)){
+        linkArr.push(value.groups)
+    }
+    console.log(linkArr)
+    let msw = document.querySelector('div.link span').innerHTML
+    // console.log(msw,msw.replace(/马思唯/g,'<a>$&</a>'))
+    
+    document.querySelector('div.link span').innerHTML = msw.replace(/马思唯(?=是)/g,`<a href='www.afk.com'>$&</a>`)
+
+    let bookshop00 = bookshop.replace(/(\d+)(.00)?(?=元)/g,(v,...arg)=>{
+        arg[1] = arg[1]||'.00'
+       return arg.splice(0,2).join("")
+    })
+    console.log(bookshop00)
+    const assertText = document.querySelector('#assert').innerHTML
+    console.log(assertText)
+    // console.log(assertText.replace(/(?<=href=(['"])).+(?=\1)/gi,'ccc'))
+    document.querySelector('#assert').innerHTML = assertText.replace(/(?<=href=(['"])).+(?=\1)/gi,'www.taobao.com')
+
+    let usernum = document.querySelector('.phonenum').innerHTML
+    console.log(usernum)
+    document.querySelector('.phonenum').innerHTML =  usernum.replace(/(?<=\d{7})\d{4}/g,'****')
+    const numstr = 'houdun1234new'
+    console.log(numstr.match(/[a-z]+(?!\d+)$/))
+    let input1 = document.querySelector('#input1')
+    input1.addEventListener('keyup',function(){
+       console.log(this.value.match(/^(?!.*aa.*).*$/))
+    })
+    let hdr = 'houdunrn12349sssda123---ddddd'
+    console.log( hdr.match(/[a-z]+[1-9]+.+?(?=d{1})/))
+</script>
+
+</html>
